@@ -1,5 +1,8 @@
 import pygame as pg
 import pygame_gui
+from all_sprites import Leaders
+from all_sprites import Menu
+from all_sprites import ScoreDisplay
 
 pg.init()
 
@@ -21,79 +24,6 @@ RED = (255, 0, 0)
 
 changing_pos = False
 
-class ScoreDisplay(pg.sprite.Sprite):
-    #TODO Сделать так, чтобы значение внутри него менялось
-    """Этот класс будет изображать счетчик очков"""
-    def __init__(self, all_sprites, x, y, width, height):
-        super().__init__(all_sprites)
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.image = pg.Surface((width, height), pg.SRCALPHA, 32)
-
-        self.font = pg.font.Font(None, 25)
-        self.text = self.font.render("Счет", 1, (0, 0, 0))
-        pg.draw.rect(self.image, (255, 125, 0), (0, 0, width, height), border_radius=20)
-        self.image.blit(self.text, (width // 5, height // 7))
-        self.text_score = "0"
-        self.score =  self.font.render(self.text_score, 1, (0, 0, 0))
-        self.image.blit(self.score, (width //5, height //2))
-
-        self.rect = pg.Rect(x, y, width, height)
-        all_sprites.add(self)
-
-    def update(self, *args):
-        if args and args[0].type == pg.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
-            print("Есть контакт")
-
-class Menu(pg.sprite.Sprite):
-    #TODO сделать главное меню
-    """Этот класс - кнопка главного меню, чуть позже ее реализую"""
-    def __init__(self, all_sprites, x, y, width, height):
-        super().__init__(all_sprites)
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.image = pg.Surface((width, height), pg.SRCALPHA, 32)
-
-        self.font = pg.font.Font(None, 25)
-        self.text = self.font.render("Меню", 1, (0, 0, 0))
-        pg.draw.rect(self.image, (255, 125, 0), (0, 0, width, height), border_radius=10)
-        self.image.blit(self.text, (width // 4, height // 4))
-
-
-        self.rect = pg.Rect(x, y, width, height)
-        all_sprites.add(self)
-
-    def update(self, *args):
-        if args and args[0].type == pg.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
-            print("Есть контакт")
-
-class Leaders(pg.sprite.Sprite):
-    #TODO сделать базу данных с таблицей лидеров всех
-    """Этот класс переводит нас на список всех лидеров"""
-    def __init__(self, all_sprites, x, y, width, height):
-        super().__init__(all_sprites)
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.image = pg.Surface((width, height), pg.SRCALPHA, 32)
-
-        self.font = pg.font.Font(None, 25)
-        self.text = self.font.render("Лидеры", 1, (0, 0, 0))
-        pg.draw.rect(self.image, (255, 125, 0), (0, 0, width, height), border_radius=10)
-        self.image.blit(self.text, (width // 7, height // 4))
-
-
-        self.rect = pg.Rect(x, y, width, height)
-        all_sprites.add(self)
-
-    def update(self, *args):
-        if args and args[0].type == pg.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
-            print("Есть контакт")
 
 def draw_logo():
     text_logo = "2048"
@@ -101,20 +31,28 @@ def draw_logo():
     text = font.render(text_logo, 1, (0, 200, 0))
     screen.blit(text, (10, 10))
 
-all_sprites = pg.sprite.Group()
 
+ui_sprites = pg.sprite.Group()
+
+score = "0"
 def draw_all_ui():
+    ScoreDisplay(ui_sprites, 123, 10, 100, 70, score)
+    Menu(ui_sprites, 230, 10, 100, 30)
+    Leaders(ui_sprites, 230, 50, 100, 30)
     draw_logo()
-    ScoreDisplay(all_sprites, 123, 10, 100, 70)
-    Menu(all_sprites, 230, 10, 100, 30)
-    Leaders(all_sprites, 230, 50, 100, 30)
 
 
+def update_score(delta):
+    global score
+    score = int(score)
+    score += delta
+    score = str(score)
 
 while run:
     screen.fill(pg.Color(color))
-    time_delta = clock.tick(60) / 1000.0
     draw_all_ui()
+
+    time_delta = clock.tick(60) / 1000.0
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
@@ -122,9 +60,10 @@ while run:
             print(event.pos)
 
         if event.type == pg.MOUSEBUTTONUP:
+            update_score(100)
+            ui_sprites.update(event)
             coords = event.pos
-    all_sprites.draw(screen)
-    all_sprites.update(event)
+    ui_sprites.draw(screen)
 
     pg.display.flip()  # Обновление кадра
 pg.quit()

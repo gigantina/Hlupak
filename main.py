@@ -56,9 +56,6 @@ while run:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
-        if event.type == pg.MOUSEBUTTONDOWN:
-            print(event.pos)
-
         if event.type == pg.MOUSEBUTTONUP:
             update_score(100)
             ui_sprites.update(event)

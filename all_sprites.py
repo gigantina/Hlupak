@@ -1,6 +1,11 @@
 import pygame as pg
 import sys
 
+
+
+
+
+
 def terminate():
     pg.quit()
     sys.exit()

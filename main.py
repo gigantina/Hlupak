@@ -27,13 +27,6 @@ manager = pygame_gui.UIManager((width, height))
 ui_sprites = pg.sprite.Group()
 
 
-def update_score(delta):
-    global score
-    score = int(score)
-    score += delta
-    score = str(score)
-
-
 
 while run:
     screen.fill(pg.Color(color))

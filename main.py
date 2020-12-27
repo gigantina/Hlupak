@@ -1,5 +1,7 @@
 import pygame as pg
 import pygame_gui
+import os
+import sys
 from all_sprites import menu_screen
 
 pg.init()
@@ -25,11 +27,24 @@ changing_pos = False
 manager = pygame_gui.UIManager((width, height))
 
 ui_sprites = pg.sprite.Group()
+def load_image(name, colorkey=None):
+    fullname = os.path.join('data', name)
+    # если файл не существует, то выходим
+    if not os.path.isfile(fullname):
+        print(f"Файл с изображением '{fullname}' не найден")
+        sys.exit()
+    image = pg.image.load(fullname)
+    return image
 
+
+
+def fon():
+    fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
+    screen.blit(fon, (0, 0))
 
 
 while run:
-    screen.fill(pg.Color(color))
+    fon()
     time_delta = clock.tick(60) / 1000.0
     for event in pg.event.get():
         if event.type == pg.QUIT:

@@ -1,7 +1,25 @@
 import pygame as pg
 import sys
+import os
+
+tile_width = tile_height = 100
+
+def load_image(name, colorkey=None):
+    fullname = os.path.join('data', name)
+    # если файл не существует, то выходим
+    if not os.path.isfile(fullname):
+        print(f"Файл с изображением '{fullname}' не найден")
+        sys.exit()
+    image = pg.image.load(fullname)
+    return image
 
 
+class Grass(pg.sprite.Sprite):
+    def __init__(self, all_sprites, pos_x, pos_y):
+        super().__init__(all_sprites)
+        self.image = pg.transform.scale(load_image('grass2.png'), (tile_width, tile_height))
+        self.rect = self.image.get_rect().move(
+            tile_width * pos_x, tile_height * pos_y)
 
 
 

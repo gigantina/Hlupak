@@ -2,6 +2,7 @@ import pygame as pg
 import pygame_gui
 import os
 import sys
+from all_sprites import Grass
 from all_sprites import menu_screen
 
 pg.init()
@@ -10,9 +11,8 @@ pg.display.set_caption(" ")  # заголовок
 
 size = width, height = 800, 600
 
-screen = pg.display.set_mode(size, pg.RESIZABLE)
-color = "white"
-screen.fill(pg.Color(color))
+screen = pg.display.set_mode(size)
+
 pg.display.update()
 count = 0
 run = True  # переменна, с помощью ее можно выходить из цикла
@@ -43,8 +43,35 @@ def fon():
     screen.blit(fon, (0, 0))
 
 
+
+def load_level(filename):
+    filename = "data/" + filename
+    # читаем уровень, убирая символы перевода строки
+    with open(filename, 'r') as mapFile:
+        level_map = [line.strip() for line in mapFile]
+
+    # и подсчитываем максимальную длину
+    max_width = max(map(len, level_map))
+
+    # дополняем каждую строку пустыми клетками ('.')
+    return list(map(lambda x: x.ljust(max_width, '.'), level_map))
+
+all_sprites = pg.sprite.Group()
+
+def generate_level(level):
+    x, y = None, None
+    for y in range(len(level)):
+        for x in range(len(level[y])):
+            if level[y][x] == '#':
+                Grass(all_sprites, x, y)
+    # вернем игрока, а также размер поля в клетках
+    return  x, y
+
+level_x, level_y = generate_level(load_level('level.txt'))
+
 while run:
     fon()
+    all_sprites.draw(screen)
     time_delta = clock.tick(60) / 1000.0
     for event in pg.event.get():
         if event.type == pg.QUIT:

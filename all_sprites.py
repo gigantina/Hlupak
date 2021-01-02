@@ -8,6 +8,7 @@ vertical_borders = pg.sprite.Group()
 all_sprites = pg.sprite.Group()
 molecule_group = pg.sprite.Group()
 
+
 class Molecule(pg.sprite.Sprite):
     """Класс молекулы"""
 

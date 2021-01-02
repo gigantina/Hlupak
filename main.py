@@ -97,6 +97,7 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
+
 SPEED = 60
 
 create_molecule()

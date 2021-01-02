@@ -4,7 +4,7 @@ import pygame_gui
 import os
 import sys
 import random
-from all_sprites import Molecule, Border, all_sprites, molecule_group, horizontal_borders, vertical_borders
+from all_sprites import Molecule, Border, all_sprites, clear
 
 pg.init()
 
@@ -97,11 +97,12 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
-
-def start_game():
+def start_gases():
     run = True
     SPEED = 60
     create_molecule()
+    fon()
+
     while run:
         fon()
         all_sprites.update()

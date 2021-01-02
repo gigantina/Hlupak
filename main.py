@@ -4,7 +4,8 @@ import pygame_gui
 import os
 import sys
 import random
-from gases import start_game
+
+from menu_sprites import menu_group
 
 pg.init()
 
@@ -41,23 +42,27 @@ def load_image(name, colorkey=None):
 
 
 def fon():
-    fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
-    screen.blit(fon, (0, 0))
+    # fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
+    # screen.blit(fon, (0, 0))
+    screen.fill((255, 255, 255))
 
+
+def show_menu():
+    pass
 
 
 SPEED = 60
-start_game()
 while run:
     fon()
     time_delta = clock.tick(SPEED) / 1000.0
+    menu_group.draw(screen)
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
 
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == 1:
-                pass
+                menu_group.update(event.pos)
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_DOWN:
                 pass

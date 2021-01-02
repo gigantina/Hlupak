@@ -37,6 +37,10 @@ class Molecule(pg.sprite.Sprite):
         if pg.sprite.spritecollideany(self, vertical_borders):
             self.vx = -self.vx
 
+    def set_color(self, color):
+        pg.draw.circle(self.image, color,
+                       (self.radius, self.radius), self.radius)
+
 
 class Border(pg.sprite.Sprite):
     # строго вертикальный или строго горизонтальный отрезок

@@ -4,7 +4,7 @@ import pygame_gui
 import os
 import sys
 import random
-from all_sprites import Molecule, Border, all_sprites, clear
+from all_sprites import Molecule, Border, all_sprites
 
 pg.init()
 
@@ -29,7 +29,6 @@ BLACK = (0, 0, 0)
 """Физичиские величины"""
 T = 100  # K
 G = 9.8  # м/с**2
-P = 101325  # Па, давление воздуха
 M = 4.82 * (10 ** -26)  # масса малекулы воздуха
 N = 0
 K = 1.38 * (10 ** -23)  # Постоянная Больцмана
@@ -97,7 +96,19 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
+def clear_group():
+    global all_sprites
+    for i in all_sprites:
+        i.kill()
+    Border(5, 5, width - 5, 5)
+    Border(5, height - 5, width - 5, height - 5)
+    Border(5, 5, 5, height - 5)
+    Border(width - 5, 5, width - 5, height - 5)
+
+
 def start_gases():
+    global N, T
+    clear_group()
     run = True
     SPEED = 60
     create_molecule()
@@ -127,3 +138,6 @@ def start_gases():
         show_parametrs()
 
         pg.display.flip()  # Обновление кадра
+
+    N = 0
+    T = 100  # K

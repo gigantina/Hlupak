@@ -70,4 +70,3 @@ while run:
                 pass
 
     pg.display.flip()  # Обновление кадра
-pg.quit()

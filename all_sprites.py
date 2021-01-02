@@ -3,13 +3,17 @@ import sys
 import os
 import random
 
-horizontal_borders = pg.sprite.Group()
-vertical_borders = pg.sprite.Group()
-all_sprites = pg.sprite.Group()
-molecule_group = pg.sprite.Group()
 
-def clear():
+def create_groups():
+    horizontal_borders = pg.sprite.Group()
+    vertical_borders = pg.sprite.Group()
     all_sprites = pg.sprite.Group()
+    molecule_group = pg.sprite.Group()
+    return horizontal_borders, vertical_borders, all_sprites, molecule_group
+
+
+horizontal_borders, vertical_borders, all_sprites, molecule_group = create_groups()
+
 
 class Molecule(pg.sprite.Sprite):
     """Класс молекулы"""

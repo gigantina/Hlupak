@@ -20,8 +20,8 @@ class Molecule(pg.sprite.Sprite):
         pg.draw.circle(self.image, color,
                        (radius, radius), radius)
         self.rect = pg.Rect(x, y, 2 * radius, 2 * radius)
-        self.vx = random.randint(-8, 0)
-        self.vy = random.randrange(-8, 0)
+        self.vx = random.randint(-8, -3)
+        self.vy = random.randrange(-8, -3)
 
     def update(self):
         """Обновление положения молекулы, а также скорость в зависимости от скорости(уже реальной, но она слишком огромная)"""

@@ -1,6 +1,5 @@
 import pygame as pg
 import math
-import pygame_gui
 import os
 import sys
 import random

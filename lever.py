@@ -8,7 +8,7 @@ from all_sprites import Molecule, Border, all_sprites, molecule_group
 
 pg.init()
 
-pg.display.set_caption("Симулятор газа")  # заголовок
+pg.display.set_caption("Симулятор рычага")  # заголовок
 
 size = width, height = 800, 600
 
@@ -32,9 +32,6 @@ G = 9.8  # м/с**2
 M = 4.82 * (10 ** -26)  # масса малекулы воздуха
 N = 0
 K = 1.38 * (10 ** -23)  # Постоянная Больцмана
-
-
-
 
 # Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
 

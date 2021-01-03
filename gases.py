@@ -8,8 +8,6 @@ from all_sprites import Molecule, Border, all_sprites, molecule_group
 
 pg.init()
 
-pg.display.set_caption("Симулятор газа")  # заголовок
-
 size = width, height = 800, 600
 
 screen = pg.display.set_mode(size)
@@ -34,15 +32,7 @@ N = 0
 K = 1.38 * (10 ** -23)  # Постоянная Больцмана
 
 
-
-
 # Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
-
-
-Border(5, 5, width - 5, 5)
-Border(5, height - 5, width - 5, height - 5)
-Border(5, 5, 5, height - 5)
-Border(width - 5, 5, width - 5, height - 5)
 
 
 def fon():
@@ -90,20 +80,12 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
-def clear_group():
-    global all_sprites
-    for i in all_sprites:
-        i.kill()
-    Border(5, 5, width - 5, 5)
-    Border(5, height - 5, width - 5, height - 5)
-    Border(5, 5, 5, height - 5)
-    Border(width - 5, 5, width - 5, height - 5)
-
-
 def start_gases():
     global N, T
     clear_group()
+    borders(width, height)
     run = True
+    title("Симулятор газа")
     SPEED = 60
     create_molecule()
     fon()
@@ -115,6 +97,7 @@ def start_gases():
         time_delta = clock.tick(SPEED) / 1000.0
         for event in pg.event.get():
             if event.type == pg.QUIT:
+                main_title()
                 run = False
 
             if event.type == pg.MOUSEBUTTONUP:

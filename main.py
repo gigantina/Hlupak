@@ -1,6 +1,7 @@
 import pygame as pg
 import math
 import os
+from functions import main_title
 import sys
 import random
 
@@ -8,7 +9,7 @@ from menu_sprites import menu_group
 
 pg.init()
 
-pg.display.set_caption(" ")  # заголовок
+main_title()
 
 size = width, height = 800, 600
 

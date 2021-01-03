@@ -9,10 +9,11 @@ def create_groups():
     vertical_borders = pg.sprite.Group()
     all_sprites = pg.sprite.Group()
     molecule_group = pg.sprite.Group()
-    return horizontal_borders, vertical_borders, all_sprites, molecule_group
+    lever_group = pg.sprite.Group()
+    return horizontal_borders, vertical_borders, all_sprites, molecule_group, lever_group
 
 
-horizontal_borders, vertical_borders, all_sprites, molecule_group = create_groups()
+horizontal_borders, vertical_borders, all_sprites, molecule_group, lever_group = create_groups()
 
 
 class Molecule(pg.sprite.Sprite):
@@ -36,6 +37,36 @@ class Molecule(pg.sprite.Sprite):
             self.vy = -self.vy
         if pg.sprite.spritecollideany(self, vertical_borders):
             self.vx = -self.vx
+
+    def set_color(self, color):
+        pg.draw.circle(self.image, color,
+                       (self.radius, self.radius), self.radius)
+
+
+class Lever(pg.sprite.Sprite):
+    """Класс рычага, пока скопирован с молекулы лол"""
+
+    def __init__(self, x, y, radius, color):
+        super().__init__(all_sprites, lever_group)
+        self.radius = radius
+        self.image = pg.Surface((2 * radius, 2 * radius),
+                                pg.SRCALPHA, 32)
+        pg.draw.circle(self.image, color,
+                       (radius, radius), radius)
+        self.rect = pg.Rect(x, y, 2 * radius, 2 * radius)
+        self.vx = random.randint(-8, -3)
+        self.vy = random.randrange(-8, -3)
+
+    """Поворот рычага в случае неравенства моментов сил с двух сторон рычага"""
+
+    def right(self):
+        pass
+
+    def left(self):
+        pass
+
+    def equal(self):
+        pass
 
     def set_color(self, color):
         pg.draw.circle(self.image, color,

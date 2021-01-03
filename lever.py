@@ -4,7 +4,7 @@ import os
 import sys
 import random
 from functions import *
-from all_sprites import Molecule, Border, all_sprites, molecule_group
+from all_sprites import Lever, Border, all_sprites, molecule_group
 
 pg.init()
 
@@ -27,11 +27,10 @@ changing_pos = False
 BLACK = (0, 0, 0)
 
 """Физичиские величины"""
-T = 100  # K
-G = 9.8  # м/с**2
-M = 4.82 * (10 ** -26)  # масса малекулы воздуха
-N = 0
-K = 1.38 * (10 ** -23)  # Постоянная Больцмана
+F1 = 10
+l1 = 4
+F2 = 20
+l2 = 2
 
 # Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
 
@@ -43,89 +42,61 @@ Border(width - 5, 5, width - 5, height - 5)
 
 
 def fon():
-    fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
+    fon = pg.transform.scale(load_image('green.png'), (width, height))
     screen.blit(fon, (0, 0))
 
 
-def create_molecule():
-    """Создает по 15 молекул"""
-    global N, molecule_group
-    color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-    for i in molecule_group:
-        i.set_color((200, 200, 200))
-    for i in range(15):
-        Molecule(width - 100, height - 100, 10, color)
-    N += 15
+def left_moment():
+    return F1 * l1
 
 
-def calculating_the_average_speed_of_molecules():
-    """Рассчитывает среднюю квадратичную скорость молекул"""
-    V = math.sqrt((3 * K * T) / M)
-    return V
-
-
-def calculating_the_pressure():
-    """Возвращает давление, которое газ оказывает на стенки"""
-    P = (N * M * pow(calculating_the_average_speed_of_molecules(), 2)) / 3
-    return P
-
-
-def change_t(num):
-    """Эта функция увеличивает температуру в кельвинах на 10 кельвинов"""
-    global T
-    T += num
+def right_moment():
+    return F2 * l2
 
 
 def show_parametrs():
     font = pg.font.Font(None, 30)
-    text = font.render(str(f"Температура: {T}K/ {round(T - 273.15)}C"), 1, BLACK)
-    screen.blit(text, (width - 300, 10))
-    text = font.render(str(f"Скорость молекул: {round(calculating_the_average_speed_of_molecules())}м/с"), 1, BLACK)
-    screen.blit(text, (width - 300, 40))
-    text = font.render(str(f"Давление: {calculating_the_pressure()}Па"), 1,
+    text = font.render(str(f"Момент силы правого плеча: {right_moment()}Н*м"), 1, BLACK)
+    screen.blit(text, (10, 40))
+    text = font.render(str(f"Момент силы левого плеча: {left_moment()}Н*м"), 1,
                        BLACK)
     screen.blit(text, (10, 10))
 
 
-def clear_group():
-    global all_sprites
-    for i in all_sprites:
-        i.kill()
-    Border(5, 5, width - 5, 5)
-    Border(5, height - 5, width - 5, height - 5)
-    Border(5, 5, 5, height - 5)
-    Border(width - 5, 5, width - 5, height - 5)
-
-
-def start_gases():
+def start_lever():
     global N, T
     clear_group()
     run = True
+    title("Симулятор рычага")
     SPEED = 60
-    create_molecule()
     fon()
 
     while run:
         fon()
         all_sprites.update()
         all_sprites.draw(screen)
+        lever = Lever(width - 100, height - 100, 10, (0, 0, 0))
+
         time_delta = clock.tick(SPEED) / 1000.0
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
+                main_title()
                 run = False
 
             if event.type == pg.MOUSEBUTTONUP:
                 if event.button == 1:
-                    create_molecule()
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_DOWN:
-                    if T > 10:
-                        change_t(-10)
-                        SPEED -= 5
-                if event.key == pg.K_UP:
-                    change_t(10)
-                    SPEED += 5
-
+                    m1 = left_moment()
+                    m2 = right_moment()
+                    if m1 == m2:
+                        print('УРАВНОВЕШЕНО')
+                        # lever.equal()
+                    elif m1 > m2:
+                        print('')
+                        # lever.left()
+                    else:
+                        print('')
+                        # lever.right()
         show_parametrs()
 
         pg.display.flip()  # Обновление кадра

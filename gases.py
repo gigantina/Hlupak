@@ -47,7 +47,7 @@ def create_molecule():
     for i in molecule_group:
         i.set_color((200, 200, 200))
     for i in range(15):
-        Molecule(width - 100, height - 100, 10, color)
+        Molecule(width - 30, height -30, 10, color)
     N += 15
 
 

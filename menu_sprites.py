@@ -31,4 +31,4 @@ class ObjectMenu(pg.sprite.Sprite):
             self.func()
 
 ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", start_gases)
-ObjectMenu(10, 300, "gases.png", "Симуляция рычага", start_lever)
+ObjectMenu(10, 300, "lever.png", "Симуляция рычага", start_lever)

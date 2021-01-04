@@ -4,7 +4,7 @@ import os
 import sys
 import random
 from functions import *
-from all_sprites import Border, all_sprites_group
+from all_sprites import Border, all_sprites_group, theory_group, Theory
 from gases_sprites import Molecule, molecule_group
 
 pg.init()
@@ -81,6 +81,9 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
+
+
+
 def start_gases():
     global N, T
     clear_group()
@@ -95,7 +98,12 @@ def start_gases():
         fon()
         all_sprites_group.update()
         all_sprites_group.draw(screen)
+        theory = Theory(10, height - 50, 20, "#00ff00")
         time_delta = clock.tick(SPEED) / 1000.0
+
+        show_parametrs()
+        theory_group.draw(screen)
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 main_title()
@@ -103,6 +111,9 @@ def start_gases():
 
             if event.type == pg.MOUSEBUTTONUP:
                 if event.button == 1:
+                    if theory.rect.collidepoint(event.pos[0], event.pos[1]):
+                        theory.open_theory(screen)
+                elif event.button == 3:
                     create_molecule()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_DOWN:
@@ -113,7 +124,6 @@ def start_gases():
                     change_t(10)
                     SPEED += 5
 
-        show_parametrs()
 
         pg.display.flip()  # Обновление кадра
 

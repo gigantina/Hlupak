@@ -3,7 +3,7 @@ import sys
 import os
 import random
 import groups
-
+from functions import *
 horizontal_borders, vertical_borders, all_sprites_group = groups.create_default_groups()
 
 
@@ -19,3 +19,35 @@ class Border(pg.sprite.Sprite):
             self.add(horizontal_borders)
             self.image = pg.Surface([x2 - x1, 1])
             self.rect = pg.Rect(x1, y1, x2 - x1, 1)
+
+
+theory_group = groups.create_theory_group()
+class Theory(pg.sprite.Sprite):
+    def __init__(self, x, y, radius, color):
+        super(Theory, self).__init__(theory_group)
+        self.radius = radius
+        self.image = pg.Surface((2 * radius, 2 * radius),
+                                pg.SRCALPHA, 32)
+        pg.draw.circle(self.image, color,
+                       (radius, radius), radius)
+        self.rect = pg.Rect(x, y, 2 * radius, 2 * radius)
+        font = pg.font.Font(None, 30)
+        text = font.render(str(f"?"), 1, (0, 0, 0))
+        self.image.blit(text, (13, 10))
+
+
+    def open_theory(self, screen):
+        pg.display.set_caption("Немного теории")
+        run = True
+        screen2 = pg.transform.smoothscale(screen, (400, 200))
+        screen.blit(screen2, (0 ,0 ))
+        font = pg.font.Font(None, 30)
+        text = font.render(str(f"C"), 1, (0, 0, 0))
+        screen2.blit(text, (10, 10))
+        while run:
+            for event in pg.event.get():
+                if event.type == pg.MOUSEBUTTONUP:
+                    run = False
+        print("Конец")
+
+

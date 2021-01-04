@@ -4,7 +4,8 @@ import os
 import sys
 import random
 from functions import *
-from all_sprites import Lever, Border, all_sprites, molecule_group
+from all_sprites import Border, all_sprites_group
+from lever_sprites import Lever, Fulcrum, Weight, weights_group, lever_group, fulcrum_group
 
 pg.init()
 
@@ -73,8 +74,8 @@ def start_lever():
 
     while run:
         fon()
-        all_sprites.update()
-        all_sprites.draw(screen)
+        all_sprites_group.update()
+        all_sprites_group.draw(screen)
         lever = Lever(width - 100, height - 100, 10, (0, 0, 0))
 
         time_delta = clock.tick(SPEED) / 1000.0

@@ -4,7 +4,8 @@ import os
 import sys
 import random
 from functions import *
-from all_sprites import Molecule, Border, all_sprites, molecule_group
+from all_sprites import Border, all_sprites_group
+from gases_sprites import Molecule, molecule_group
 
 pg.init()
 
@@ -92,8 +93,8 @@ def start_gases():
 
     while run:
         fon()
-        all_sprites.update()
-        all_sprites.draw(screen)
+        all_sprites_group.update()
+        all_sprites_group.draw(screen)
         time_delta = clock.tick(SPEED) / 1000.0
         for event in pg.event.get():
             if event.type == pg.QUIT:

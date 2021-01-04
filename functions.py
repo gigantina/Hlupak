@@ -1,7 +1,7 @@
 import os
 import sys
 import pygame as pg
-from all_sprites import all_sprites, Border
+from all_sprites import all_sprites_group, Border
 
 
 def load_image(name, colorkey=None):
@@ -23,8 +23,8 @@ def title(caption):
 
 
 def clear_group():
-    global all_sprites
-    for i in all_sprites:
+    global all_sprites_group
+    for i in all_sprites_group:
         i.kill()
 
 

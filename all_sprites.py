@@ -4,6 +4,7 @@ import os
 import random
 import groups
 from functions import *
+
 horizontal_borders, vertical_borders, all_sprites_group = groups.create_default_groups()
 
 
@@ -22,6 +23,8 @@ class Border(pg.sprite.Sprite):
 
 
 theory_group = groups.create_theory_group()
+
+
 class Theory(pg.sprite.Sprite):
     def __init__(self, x, y, radius, color):
         super(Theory, self).__init__(theory_group)
@@ -35,19 +38,29 @@ class Theory(pg.sprite.Sprite):
         text = font.render(str(f"?"), 1, (0, 0, 0))
         self.image.blit(text, (13, 10))
 
+    def fon(self, screen):
+        """изменяет фон"""
+        size = width, height = 800, 600
+        fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
+        screen.blit(fon, (0, 0))
 
-    def open_theory(self, screen):
+    def draw_text(self, text, screen):
+        """Выводим текст с теорией на экран"""
+        font = pg.font.Font(None, 30)
+        text = font.render(text, 1, (0, 0, 0))
+        screen.blit(text, (100, 100))
+
+    def open_theory(self, screen, text):
+        """Открывает окно с теорией"""
         pg.display.set_caption("Немного теории")
         run = True
-        screen2 = pg.transform.smoothscale(screen, (400, 200))
-        screen.blit(screen2, (0 ,0 ))
-        font = pg.font.Font(None, 30)
-        text = font.render(str(f"C"), 1, (0, 0, 0))
-        screen2.blit(text, (10, 10))
+        self.fon(screen)
+        self.draw_text(text, screen)
         while run:
+            self.fon(screen)
+            self.draw_text(text, screen)
             for event in pg.event.get():
-                if event.type == pg.MOUSEBUTTONUP:
+                if event.type == pg.MOUSEBUTTONUP or event.type == pg.QUIT or event.type == pg.KEYUP \
+                        and event.key == pg.K_ESCAPE:
                     run = False
-        print("Конец")
-
-
+            pg.display.flip()

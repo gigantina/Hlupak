@@ -41,6 +41,19 @@ def fon():
     screen.blit(fon, (0, 0))
 
 
+def borders(width, height):
+    Border(5, 5, width - 5, 5)
+    Border(5, height - 5, width - 5, height - 5)
+    Border(5, 5, 5, height - 5)
+    Border(width - 5, 5, width - 5, height - 5)
+
+
+def clear_group():
+    global all_sprites_group
+    for i in all_sprites_group:
+        i.kill()
+
+
 def create_molecule():
     """Создает по 15 молекул"""
     global N, molecule_group
@@ -48,7 +61,7 @@ def create_molecule():
     for i in molecule_group:
         i.set_color((200, 200, 200))
     for i in range(15):
-        Molecule(width - 30, height -30, 10, color)
+        Molecule(width - 30, height - 30, 10, color)
     N += 15
 
 
@@ -81,9 +94,6 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
-
-
-
 def start_gases():
     global N, T
     clear_group()
@@ -112,7 +122,7 @@ def start_gases():
             if event.type == pg.MOUSEBUTTONUP:
                 if event.button == 1:
                     if theory.rect.collidepoint(event.pos[0], event.pos[1]):
-                        theory.open_theory(screen)
+                        theory.open_theory(screen, "Это текст с тестовой теорией")
                 elif event.button == 3:
                     create_molecule()
             if event.type == pg.KEYDOWN:
@@ -123,7 +133,6 @@ def start_gases():
                 if event.key == pg.K_UP:
                     change_t(10)
                     SPEED += 5
-
 
         pg.display.flip()  # Обновление кадра
 

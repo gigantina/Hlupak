@@ -1,7 +1,7 @@
 import os
 import sys
 import pygame as pg
-from all_sprites import all_sprites_group, Border
+
 
 
 def load_image(name, colorkey=None):
@@ -20,16 +20,3 @@ def main_title():
 
 def title(caption):
     pg.display.set_caption(caption)
-
-
-def clear_group():
-    global all_sprites_group
-    for i in all_sprites_group:
-        i.kill()
-
-
-def borders(width, height):
-    Border(5, 5, width - 5, 5)
-    Border(5, height - 5, width - 5, height - 5)
-    Border(5, 5, 5, height - 5)
-    Border(width - 5, 5, width - 5, height - 5)

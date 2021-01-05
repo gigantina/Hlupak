@@ -104,7 +104,6 @@ def start_gases():
     create_molecule()
     fon()
 
-
     while run:
         fon()
         all_sprites_group.update()

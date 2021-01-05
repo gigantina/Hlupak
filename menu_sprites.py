@@ -9,6 +9,7 @@ from lever import start_lever
 menu_group = pg.sprite.Group()
 FUNCTIONS = [start_lever, start_gases]
 
+
 class ObjectMenu(pg.sprite.Sprite):
     """Класс объекта меню"""
 
@@ -29,6 +30,7 @@ class ObjectMenu(pg.sprite.Sprite):
         x, y = pos
         if self.rect.collidepoint(x, y):
             self.func()
+
 
 ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", start_gases)
 ObjectMenu(10, 300, "lever.png", "Симуляция рычага", start_lever)

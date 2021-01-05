@@ -46,9 +46,13 @@ class Theory(pg.sprite.Sprite):
 
     def draw_text(self, text, screen):
         """Выводим текст с теорией на экран"""
-        font = pg.font.Font(None, 30)
-        text = font.render(text, 1, (0, 0, 0))
-        screen.blit(text, (100, 100))
+        text = text.split("\n")
+        y = 100
+        for t in text:
+            font = pg.font.Font(None, 30)
+            text = font.render(t, 1, (0, 0, 0))
+            screen.blit(text, (60, y))
+            y += 30
 
     def open_theory(self, screen, text):
         """Открывает окно с теорией"""

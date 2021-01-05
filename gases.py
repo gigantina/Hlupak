@@ -28,7 +28,7 @@ BLACK = (0, 0, 0)
 """Физичиские величины"""
 T = 100  # K
 G = 9.8  # м/с**2
-M = 4.82 * (10 ** -26)  # масса малекулы воздуха
+M = 4.82 * (10 ** -26)  # масса молекулы воздуха(кг)
 N = 0
 K = 1.38 * (10 ** -23)  # Постоянная Больцмана
 
@@ -122,7 +122,11 @@ def start_gases():
             if event.type == pg.MOUSEBUTTONUP:
                 if event.button == 1:
                     if theory.rect.collidepoint(event.pos[0], event.pos[1]):
-                        theory.open_theory(screen, "Это текст с тестовой теорией")
+                        theory.open_theory(screen, "В этой симуляции используетая идеальный газ.\n"
+                                                   "Тут используется основная формула Молекулярно-кинетической теории: \n"
+                                                   "p = (n * m(Молекулы в кг) * V^2) / 3\n"
+                                                   "Также формула кинетической энергии газа: \n"
+                                                   "E = (m(Молекулы в кг) * V^2)/2")
                 elif event.button == 3:
                     create_molecule()
             if event.type == pg.KEYDOWN:

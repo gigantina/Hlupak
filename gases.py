@@ -103,12 +103,12 @@ def start_gases():
     SPEED = 60
     create_molecule()
     fon()
-
+    theory = Theory(10, height - 50, 20, "#00ff00")
     while run:
         fon()
         all_sprites_group.update()
         all_sprites_group.draw(screen)
-        theory = Theory(10, height - 50, 20, "#00ff00")
+
         time_delta = clock.tick(SPEED) / 1000.0
 
         show_parametrs()

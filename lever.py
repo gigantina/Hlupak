@@ -4,7 +4,7 @@ import os
 import sys
 import random
 from functions import *
-from all_sprites import Border, all_sprites_group
+from all_sprites import Border, all_sprites_group, theory_group, Theory
 from lever_sprites import Lever, Fulcrum, Weight, weights_group, lever_group, fulcrum_group
 
 pg.init()
@@ -34,15 +34,16 @@ F2 = 0
 l2 = 0
 
 
-
 def fon():
     fon = pg.transform.scale(load_image('green.png'), (width, height))
     screen.blit(fon, (0, 0))
+
 
 def clear_group():
     global all_sprites_group
     for i in all_sprites_group:
         i.kill()
+
 
 def left_moment():
     return F1 * l1
@@ -68,7 +69,7 @@ def start_lever():
     title("Симулятор рычага")
     SPEED = 60
     fon()
-
+    theory = Theory(10, height - 50, 20, "#00ff00")
     while run:
         fon()
         all_sprites_group.update()
@@ -77,6 +78,7 @@ def start_lever():
         fulcrum = Fulcrum(406, 225)
 
         time_delta = clock.tick(SPEED) / 1000.0
+        theory_group.draw(screen)
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -84,6 +86,9 @@ def start_lever():
                 run = False
 
             if event.type == pg.MOUSEBUTTONUP:
+                if theory.rect.collidepoint(event.pos[0], event.pos[1]):
+                    theory.open_theory(screen, "Тут текст для теории\n :)")
+
                 if event.button == 1:
                     m1 = left_moment()
                     m2 = right_moment()

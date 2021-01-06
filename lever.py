@@ -28,18 +28,11 @@ changing_pos = False
 BLACK = (0, 0, 0)
 
 """Физичиские величины"""
-F1 = 10
-l1 = 4
-F2 = 20
-l2 = 2
+F1 = 0
+l1 = 0
+F2 = 0
+l2 = 0
 
-# Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
-
-
-Border(5, 5, width - 5, 5)
-Border(5, height - 5, width - 5, height - 5)
-Border(5, 5, 5, height - 5)
-Border(width - 5, 5, width - 5, height - 5)
 
 
 def fon():
@@ -80,7 +73,8 @@ def start_lever():
         fon()
         all_sprites_group.update()
         all_sprites_group.draw(screen)
-        #lever = Lever(width - 100, height - 100, 10, (0, 0, 0))
+        lever = Lever(95, 250)
+        fulcrum = Fulcrum(406, 225)
 
         time_delta = clock.tick(SPEED) / 1000.0
 
@@ -103,9 +97,5 @@ def start_lever():
                         print('')
                         # lever.right()
         show_parametrs()
-        pg.draw.rect(screen, (255, 0, 0), pg.Rect(0, 0, 100, 100))
 
         pg.display.flip()  # Обновление кадра
-
-    N = 0
-    T = 100  # K

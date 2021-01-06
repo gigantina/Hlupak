@@ -7,7 +7,7 @@ from functions import *
 import all_sprites
 
 all_sprites_group = all_sprites.all_sprites_group
-lever_group, weights_group, fulcrum_group = groups.create_lever_groups()
+lever_group, weights_group, fulcrum_group, points_group = groups.create_lever_groups()
 
 
 class Lever(pg.sprite.Sprite):
@@ -37,9 +37,15 @@ class Weight(pg.sprite.Sprite):
 
     def __init__(self, x, y, image_path, value):
         super().__init__(all_sprites_group, weights_group)
-        self.image = pg.Surface(load_image(image_path))
-        self.power = value * 10  # сила тяжести груза
-        self.rect = pg.Rect(x, y)
+        self.image = load_image(image_path)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.x_des = 0
+        self.y_des = 0
+        self.weight = value * 10
+        self.moving = False
+        self.orientation = None
 
     """Здесь будет перетаскивание предмета"""
 
@@ -64,3 +70,14 @@ class Fulcrum(pg.sprite.Sprite):
 
     def equal(self):
         pass
+
+
+class Point(pg.sprite.Sprite):
+    def __init__(self, x, y, lenght, orientation):
+        super().__init__(all_sprites_group, points_group)
+        self.image = pg.Surface((3, 30))
+        self.rect = pg.Rect(x, y, 3, 30)
+        self.color = (0, 0, 0)
+        self.colored = False
+        self.lenght = lenght
+        self.orientation = orientation

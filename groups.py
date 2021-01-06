@@ -17,7 +17,8 @@ def create_lever_groups():
     lever_group = pg.sprite.Group()
     weights_group = pg.sprite.Group()
     fulcrum_group = pg.sprite.Group()
-    return lever_group, weights_group, fulcrum_group
+    points_group = pg.sprite.Group()
+    return lever_group, weights_group, fulcrum_group, points_group
 
 
 def create_theory_group():

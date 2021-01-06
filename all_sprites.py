@@ -31,7 +31,7 @@ class Theory(pg.sprite.Sprite):
         self.radius = radius
         self.image = pg.Surface((2 * radius, 2 * radius),
                                 pg.SRCALPHA, 32)
-        pg.draw.circle(self.image, color,
+        pg.draw.circle(self.image, pg.Color(color),
                        (radius, radius), radius)
         self.rect = pg.Rect(x, y, 2 * radius, 2 * radius)
         font = pg.font.Font(None, 30)

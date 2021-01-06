@@ -13,10 +13,12 @@ lever_group, weights_group, fulcrum_group = groups.create_lever_groups()
 class Lever(pg.sprite.Sprite):
     """Класс рычага"""
 
-    def __init__(self, x1, y1, image_path):
+    def __init__(self):
         super().__init__(all_sprites_group, lever_group)
-        self.image = pg.Surface(load_image(image_path))
-        self.rect = pg.Rect(x1, y1)
+        self.image = load_image("lever_sprite.png")
+        self.rect = self.image.get_rect()
+        self.rect.x = 10
+        self.rect.y = 10
 
     """Поворот рычага в случае неравенства моментов сил с двух сторон рычага"""
 
@@ -40,13 +42,3 @@ class Weight(pg.sprite.Sprite):
         self.rect = pg.Rect(x, y)
 
     """Здесь будет перетаскивание предмета"""
-
-
-class Fulcrum(pg.sprite.Sprite):
-    def __init__(self, x, y, image_path):
-        super().__init__(all_sprites_group, weights_group)
-        self.image = pg.Surface(load_image(image_path))
-        self.value = 0.5
-        self.rect = pg.Rect(x, y)
-
-    """Здесь будет изменение значение self.value, т.е изменение положения точки опоры рычага"""

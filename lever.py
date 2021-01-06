@@ -46,6 +46,10 @@ def fon():
     fon = pg.transform.scale(load_image('green.png'), (width, height))
     screen.blit(fon, (0, 0))
 
+def clear_group():
+    global all_sprites_group
+    for i in all_sprites_group:
+        i.kill()
 
 def left_moment():
     return F1 * l1
@@ -76,7 +80,7 @@ def start_lever():
         fon()
         all_sprites_group.update()
         all_sprites_group.draw(screen)
-        lever = Lever(width - 100, height - 100, 10, (0, 0, 0))
+        #lever = Lever(width - 100, height - 100, 10, (0, 0, 0))
 
         time_delta = clock.tick(SPEED) / 1000.0
 
@@ -99,6 +103,7 @@ def start_lever():
                         print('')
                         # lever.right()
         show_parametrs()
+        pg.draw.rect(screen, (255, 0, 0), pg.Rect(0, 0, 100, 100))
 
         pg.display.flip()  # Обновление кадра
 

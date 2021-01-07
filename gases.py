@@ -34,6 +34,7 @@ K = 1.38 * (10 ** -23)  # Постоянная Больцмана
 
 
 # Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
+THEORY_TEXT = theory('gases.txt')
 
 
 def fon():
@@ -122,11 +123,7 @@ def start_gases():
             if event.type == pg.MOUSEBUTTONUP:
                 if event.button == 1:
                     if theory.rect.collidepoint(event.pos[0], event.pos[1]):
-                        theory.open_theory(screen, "В этой симуляции используетая идеальный газ.\n"
-                                                   "Тут используется основная формула Молекулярно-кинетической теории: \n"
-                                                   "p = (n * m(Молекулы в кг) * V^2) / 3\n"
-                                                   "Также формула кинетической энергии газа: \n"
-                                                   "E = (m(Молекулы в кг) * V^2)/2")
+                        theory.open_theory(screen, THEORY_TEXT)
                 elif event.button == 3:
                     create_molecule()
             if event.type == pg.KEYDOWN:

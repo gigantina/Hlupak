@@ -19,3 +19,10 @@ def main_title():
 
 def title(caption):
     pg.display.set_caption(caption)
+
+
+def theory(name):
+    f = open(name, 'r', encoding='utf-8')
+    lines = ''.join(f.readlines())
+    f.close()
+    return lines

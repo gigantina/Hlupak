@@ -22,8 +22,12 @@ class Lever(pg.sprite.Sprite):
 
     """Поворот рычага в случае неравенства моментов сил с двух сторон рычага"""
 
-    def right(self):
+    def rotate(self, angle):
+        # self.rect = pg.transform.rotate(self.image, angle) не работает
         pass
+
+    def right(self):
+        self.rotate(45)
 
     def left(self):
         pass
@@ -60,24 +64,13 @@ class Fulcrum(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-    """Поворот рычага в случае неравенства моментов сил с двух сторон рычага"""
-
-    def right(self):
-        pass
-
-    def left(self):
-        pass
-
-    def equal(self):
-        pass
-
 
 class Point(pg.sprite.Sprite):
-    def __init__(self, x, y, lenght, orientation):
+    def __init__(self, x, y, id, orientation):
         super().__init__(all_sprites_group, points_group)
         self.image = pg.Surface((3, 30))
         self.rect = pg.Rect(x, y, 3, 30)
         self.color = (0, 0, 0)
         self.colored = False
-        self.lenght = lenght
+        self.id = id
         self.orientation = orientation

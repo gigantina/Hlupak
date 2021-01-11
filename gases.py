@@ -47,12 +47,6 @@ def borders(width, height):
     Border(width - 5, 5, width - 5, height - 5)
 
 
-def clear_group():
-    global all_sprites_group
-    for i in all_sprites_group:
-        i.kill()
-
-
 def create_molecule():
     """Создает по 15 молекул"""
     global N, molecule_group
@@ -64,13 +58,12 @@ def create_molecule():
     N += 15
 
 
-
-
 def show_parametrs():
     font = pg.font.Font(None, 30)
     text = font.render(str(f"Температура: {T}K/ {round(T - 273.15)}C"), 1, BLACK)
     screen.blit(text, (width - 300, 10))
-    text = font.render(str(f"Скорость молекул: {round(calculating_the_average_speed_of_molecules(K, M, T))}м/с"), 1, BLACK)
+    text = font.render(str(f"Скорость молекул: {round(calculating_the_average_speed_of_molecules(K, M, T))}м/с"), 1,
+                       BLACK)
     screen.blit(text, (width - 300, 40))
     text = font.render(str(f"Давление: {calculating_the_pressure(K, M, T, N)}Па"), 1,
                        BLACK)
@@ -79,7 +72,7 @@ def show_parametrs():
 
 def start_gases():
     global N, T
-    clear_group()
+    clear_group(all_sprites_group)
     borders(width, height)
     run = True
     title("Симулятор газа")

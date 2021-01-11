@@ -6,6 +6,11 @@ import pygame as pg
 from gases_sprites import molecule_group
 
 
+def clear_group(all_sprites_group):
+    for i in all_sprites_group:
+        i.kill()
+
+
 def calculating_the_average_speed_of_molecules(K, M, T):
     """Рассчитывает среднюю квадратичную скорость молекул"""
     V = math.sqrt((3 * K * T) / M)
@@ -37,6 +42,7 @@ def theory(name):
     lines = ''.join(f.readlines())
     f.close()
     return lines
+
 
 def kill_15():
     k = 0

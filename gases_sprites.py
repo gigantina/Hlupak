@@ -1,6 +1,4 @@
 import pygame as pg
-import sys
-import os
 import random
 import groups
 import all_sprites
@@ -24,14 +22,22 @@ class Molecule(pg.sprite.Sprite):
         self.vx = random.randint(-8, -3)
         self.vy = random.randrange(-8, -3)
 
-    def update(self):
+    def update(self, real=False):
         """Обновление положения молекулы, а также скорость в зависимости от скорости(уже реальной, но она слишком огромная)"""
         self.rect = self.rect.move(self.vx, self.vy)
         if pg.sprite.spritecollideany(self, horizontal_borders):
             self.vy = -self.vy
         if pg.sprite.spritecollideany(self, vertical_borders):
             self.vx = -self.vx
+        if real:
+            """чтобы не сделать лишний класс реального газа, можно сделать так, чтобы по флагу были реализованы
+                                                                                        столкновения молекул"""
+            for mol in molecule_group:
+                if mol != self and pg.sprite.collide_mask(self, mol):
+                    self.vx *= -1
+                    self.vy *= -1
 
     def set_color(self, color):
+        """изменяет цвет отдельной молекулы"""
         pg.draw.circle(self.image, color,
                        (self.radius, self.radius), self.radius)

@@ -31,8 +31,9 @@ M = 4.82 * (10 ** -26)  # масса молекулы воздуха(кг)
 N = 0
 K = 1.38 * (10 ** -23)  # Постоянная Больцмана
 
+
 # Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
-THEORY_TEXT = theory('gases.txt')
+THEORY_TEXT = theory('real_gases.txt')
 
 
 def fon():
@@ -60,7 +61,7 @@ def create_molecule():
     for i in molecule_group:
         i.set_color((200, 200, 200))
     for i in range(15):
-        Molecule(width - 30, height - 30, 10, color)
+        Molecule(random.randint(40, width - 40), random.randint(40, height - 40), 5, color)
     N += 15
 
 
@@ -93,19 +94,19 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
-def start_gases():
+def start_realistic_gases():
     global N, T
     clear_group()
     borders(width, height)
     run = True
-    title("Симулятор газа")
+    title("Симулятор реального газа")
     SPEED = 60
     create_molecule()
     fon()
     theory = Theory(10, height - 50, 20, "#00ff00")
     while run:
         fon()
-        all_sprites_group.update()
+        all_sprites_group.update(True)
         all_sprites_group.draw(screen)
 
         time_delta = clock.tick(SPEED) / 1000.0
@@ -128,7 +129,6 @@ def start_gases():
                     kill_15()
                     if N != 0:
                         N -= 15
-
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_DOWN:
                     if T > 10:

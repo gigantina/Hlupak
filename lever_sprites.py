@@ -15,7 +15,7 @@ class Lever(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, lever_group)
-        self.image = load_image("lever_sprite.png")
+        self.image = all_sprites.load_image("lever_sprite.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -41,7 +41,7 @@ class Weight(pg.sprite.Sprite):
 
     def __init__(self, x, y, image_path, value):
         super().__init__(all_sprites_group, weights_group)
-        self.image = load_image(image_path)
+        self.image = all_sprites.load_image(image_path)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -59,7 +59,7 @@ class Fulcrum(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, lever_group)
-        self.image = load_image("fulcrum.png")
+        self.image = all_sprites.load_image("fulcrum.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

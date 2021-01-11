@@ -1,12 +1,17 @@
 import pygame as pg
-import sys
-import os
-import random
 import groups
 from functions import *
 
 horizontal_borders, vertical_borders, all_sprites_group = groups.create_default_groups()
 
+def load_image(name, colorkey=None):
+    fullname = os.path.join('data', name)
+    # если файл не существует, то выходим
+    if not os.path.isfile(fullname):
+        print(f"Файл с изображением '{fullname}' не найден")
+        sys.exit()
+    image = pg.image.load(fullname)
+    return image
 
 class Border(pg.sprite.Sprite):
     # строго вертикальный или строго горизонтальный отрезок

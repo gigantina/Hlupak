@@ -1,10 +1,6 @@
-import pygame as pg
-import math
-import os
-import sys
-import random
+
 from functions import *
-from all_sprites import Border, all_sprites_group, theory_group, Theory
+from all_sprites import Border, load_image, theory_group, Theory, all_sprites_group
 from lever_sprites import Lever, Point, Fulcrum, Weight, weights_group, lever_group, fulcrum_group, points_group
 
 pg.init()
@@ -115,7 +111,6 @@ def start_lever():
                         offset_x = weight.rect.x - mouse_x
                         offset_y = weight.rect.y - mouse_y
                         break
-
 
             if event.type == pg.MOUSEBUTTONUP:
                 if theory.rect.collidepoint(event.pos):

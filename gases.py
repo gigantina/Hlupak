@@ -64,31 +64,15 @@ def create_molecule():
     N += 15
 
 
-def calculating_the_average_speed_of_molecules():
-    """Рассчитывает среднюю квадратичную скорость молекул"""
-    V = math.sqrt((3 * K * T) / M)
-    return V
-
-
-def calculating_the_pressure():
-    """Возвращает давление, которое газ оказывает на стенки"""
-    P = (N * M * pow(calculating_the_average_speed_of_molecules(), 2)) / 3
-    return P
-
-
-def change_t(num):
-    """Эта функция увеличивает температуру в кельвинах на 10 кельвинов"""
-    global T
-    T += num
 
 
 def show_parametrs():
     font = pg.font.Font(None, 30)
     text = font.render(str(f"Температура: {T}K/ {round(T - 273.15)}C"), 1, BLACK)
     screen.blit(text, (width - 300, 10))
-    text = font.render(str(f"Скорость молекул: {round(calculating_the_average_speed_of_molecules())}м/с"), 1, BLACK)
+    text = font.render(str(f"Скорость молекул: {round(calculating_the_average_speed_of_molecules(K, M, T))}м/с"), 1, BLACK)
     screen.blit(text, (width - 300, 40))
-    text = font.render(str(f"Давление: {calculating_the_pressure()}Па"), 1,
+    text = font.render(str(f"Давление: {calculating_the_pressure(K, M, T, N)}Па"), 1,
                        BLACK)
     screen.blit(text, (10, 10))
 

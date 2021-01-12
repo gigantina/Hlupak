@@ -34,8 +34,11 @@ class Molecule(pg.sprite.Sprite):
                                                                                         столкновения молекул"""
             for mol in molecule_group:
                 if mol != self and pg.sprite.collide_mask(self, mol):
-                    self.vx *= -1
-                    self.vy *= -1
+                    if random.choice([True, False]):
+                        self.vx *= -1
+                    if random.choice([True, False]):
+                        self.vy *= -1
+                    break
 
     def set_color(self, color):
         """изменяет цвет отдельной молекулы"""

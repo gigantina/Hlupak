@@ -109,10 +109,10 @@ def start_gases():
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_DOWN:
                     if T > 10:
-                        change_t(-10)
+                        T = change_t(-10, T)
                         SPEED -= 5
                 if event.key == pg.K_UP:
-                    change_t(10)
+                    T = change_t(10, T)
                     SPEED += 5
 
         pg.display.flip()  # Обновление кадра

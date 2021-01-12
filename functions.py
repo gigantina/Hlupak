@@ -23,10 +23,9 @@ def calculating_the_pressure(K, M, T, N):
     return P
 
 
-def change_t(num):
+def change_t(num, T):
     """Эта функция увеличивает температуру в кельвинах на 10 кельвинов"""
-    global T
-    T += num
+    return T + num
 
 
 def main_title():

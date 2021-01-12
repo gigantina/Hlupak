@@ -21,6 +21,13 @@ def create_lever_groups():
     return lever_group, weights_group, fulcrum_group, points_group
 
 
+def create_magnet_groups():
+    lode_group = pg.sprite.Group()
+    arrow_group = pg.sprite.Group()
+    compass_group = pg.sprite.Group()
+    return lode_group, arrow_group, compass_group
+
+
 def create_theory_group():
     t = pg.sprite.Group()
     return t

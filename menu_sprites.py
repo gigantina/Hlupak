@@ -3,9 +3,9 @@ from functions import *
 from gases import start_gases
 from lever import start_lever
 from realistic_gases import start_realistic_gases
+from magnet import start_magnet
 
 menu_group = pg.sprite.Group()
-FUNCTIONS = [start_lever, start_gases]
 
 
 class ObjectMenu(pg.sprite.Sprite):
@@ -33,3 +33,4 @@ class ObjectMenu(pg.sprite.Sprite):
 ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", start_gases)
 ObjectMenu(10, 300, "lever.png", "Симуляция рычага", start_lever)
 ObjectMenu(400, 10, "real_gases.png", "Симуляция реального газа", start_realistic_gases)
+ObjectMenu(400, 300, "real_gases.png", "Симуляция магнитной стрелки", start_magnet)

@@ -51,8 +51,6 @@ class Weight(pg.sprite.Sprite):
         self.moving = False
         self.orientation = None
 
-    """Здесь будет перетаскивание предмета"""
-
 
 class Fulcrum(pg.sprite.Sprite):
     """Класс рычага"""

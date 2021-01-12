@@ -32,13 +32,13 @@ class Molecule(pg.sprite.Sprite):
         if real:
             """чтобы не сделать лишний класс реального газа, можно сделать так, чтобы по флагу были реализованы
                                                                                         столкновения молекул"""
-            for mol in molecule_group:
-                if mol != self and pg.sprite.collide_mask(self, mol):
-                    if random.choice([True, False]):
-                        self.vx *= -1
-                    if random.choice([True, False]):
-                        self.vy *= -1
-                    break
+            group = pg.sprite.spritecollide(self, molecule_group, None)
+            for mol in group:
+                mol.vx *= -1
+                mol.vy *= -1
+            if  pg.sprite.spritecollideany(self, molecule_group):
+                self.vx *= -1
+                self.vy *= -1
 
     def set_color(self, color):
         """изменяет цвет отдельной молекулы"""

@@ -40,20 +40,33 @@ BLACK = (0, 0, 0)
 world = world(gravity=(0, -10)) # создание поля
 
 ground_body = world.CreateStaticBody(
+    position=(0, 10),
+    shapes=polygonShape(box=(20, 0.5))
+)
+ground_body2 = world.CreateStaticBody(
+    position=(37, 10),
+    shapes=polygonShape(box=(10, 0.5))
+)
+
+ground_body3 = world.CreateStaticBody(
     position=(0, 0),
     shapes=polygonShape(box=(50, 1))
 )
-for i in range(5, 40, 5):
-    """Создаем круги"""
-    body = world.CreateDynamicBody(position=(i, 20))
-    circle = body.CreateCircleFixture(radius=1, density=1, friction=0.3)
+
+def create_circle():
+    for i in range(5, 40, 5):
+        """Создаем круги"""
+        body = world.CreateDynamicBody(position=(i, 20))
+        circle = body.CreateCircleFixture(radius=1, density=1, friction=0.3)
+
+def create_polygons():
+    for x in range(5, 40, 4):
+        """Создаем прямоугольники"""
+        body = world.CreateDynamicBody(position=(x, 30), angle=x)
+        box = body.CreatePolygonFixture(box=(2, 1), density=1, friction=0.3)
 
 
-for x in range(5, 40, 4):
-    """Создаем прямоугольники"""
-    body = world.CreateDynamicBody(position=(x, 30), angle=x)
-    box = body.CreatePolygonFixture(box=(2, 1), density=1, friction=0.3)
-
+create_circle()
 colors = {
     staticBody: (255, 0, 255, 255),
     dynamicBody: (127, 127, 127, 255)
@@ -103,7 +116,10 @@ def start_balls():
                 run = False
 
             if event.type == pg.MOUSEBUTTONUP:
-                pass
+                if event.button == 1:
+                    create_circle()
+                elif event.button == 3:
+                    create_polygons()
 
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_DOWN:

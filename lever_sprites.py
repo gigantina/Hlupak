@@ -15,26 +15,25 @@ class Lever(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, lever_group)
-        self.image = all_sprites.load_image("lever_sprite.png").convert_alpha()
+        self.image = all_sprites.load_image("lever_sprite.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.orig = self.image
 
     """Поворот рычага в случае неравенства моментов сил с двух сторон рычага"""
 
     def rotate(self, angle):
-        self.rect = self.image.get_rect(center=self.rect.center)
-        self.image = pg.transform.rotate(self.orig, angle)
+        # self.rect = pg.transform.rotate(self.image, angle) не работает
+        pass
 
     def right(self):
-        self.rotate(-10)
+        self.rotate(45)
 
     def left(self):
-        self.rotate(10)
+        pass
 
     def equal(self):
-        self.rotate(0)
+        pass
 
 
 class Weight(pg.sprite.Sprite):
@@ -52,6 +51,8 @@ class Weight(pg.sprite.Sprite):
         self.moving = False
         self.orientation = None
 
+    """Здесь будет перетаскивание предмета"""
+
 
 class Fulcrum(pg.sprite.Sprite):
     """Класс рычага"""
@@ -67,27 +68,9 @@ class Fulcrum(pg.sprite.Sprite):
 class Point(pg.sprite.Sprite):
     def __init__(self, x, y, id, orientation):
         super().__init__(all_sprites_group, points_group)
-        self.image = pg.Surface((3, 30)).convert_alpha()
+        self.image = pg.Surface((3, 30))
         self.rect = pg.Rect(x, y, 3, 30)
         self.color = (0, 0, 0)
         self.colored = False
         self.id = id
         self.orientation = orientation
-        self.orig = self.image
-
-    def move(self, x, y):
-        self.rect.x = x
-        self.rect.y = y
-
-    def rotate(self, angle):
-        self.rect = self.image.get_rect(center=self.rect.center)
-        self.image = pg.transform.rotate(self.orig, angle)
-
-    def right(self):
-        self.rotate(-10)
-
-    def left(self):
-        self.rotate(10)
-
-    def equal(self):
-        self.rotate(0)

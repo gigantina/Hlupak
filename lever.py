@@ -1,4 +1,3 @@
-
 from functions import *
 from all_sprites import Border, load_image, theory_group, Theory, all_sprites_group
 from lever_sprites import Lever, Point, Fulcrum, Weight, weights_group, lever_group, fulcrum_group, points_group
@@ -62,6 +61,7 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
+# TODO исправить баг, что когда рычаг поворачивается, а точки нет
 def start_lever():
     global N, T
     clear_group()
@@ -74,6 +74,7 @@ def start_lever():
     BORDER = 10
     theory = Theory(10, height - 50, 20, "#00ff00")
     lever_sprite = Lever(BORDER, 250)
+    fulcrum = Fulcrum(393, 225)
     orient = True
     for i in range(20):
         Point((BORDER - 1) + 40 * i + 10, 250, i, orient)
@@ -84,7 +85,6 @@ def start_lever():
             lever[point.id] = [point.orientation, 10 - point.id, 0]
         else:
             lever[point.id] = [point.orientation, point.id - 9, 0]
-    Fulcrum(393, 225)
     moving = False
     Weight(40, 100, 'weight_5kg.png', 5)
     Weight(80, 100, 'weight_10kg.png', 10)
@@ -111,6 +111,7 @@ def start_lever():
                         offset_x = weight.rect.x - mouse_x
                         offset_y = weight.rect.y - mouse_y
                         break
+                print(event.pos)
 
             if event.type == pg.MOUSEBUTTONUP:
                 if theory.rect.collidepoint(event.pos):
@@ -136,8 +137,17 @@ def start_lever():
         m2 = right_moment()
         if m1 == m2:
             lever_sprite.equal()
+            for point_sprite in points_group:
+                point_sprite.equal()
         elif m1 > m2:
             lever_sprite.left()
+            i = 0
+            for point_sprite in points_group:
+                point_sprite.left()
+                point_sprite.move(i)
+                i += 1
         else:
             lever_sprite.right()
+            for point_sprite in points_group:
+                point_sprite.right()
         pg.display.flip()  # Обновление кадра

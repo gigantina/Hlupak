@@ -7,6 +7,7 @@ from gases_sprites import molecule_group
 
 
 def clear_group(all_sprites_group):
+    """Очищает группы"""
     for i in all_sprites_group:
         i.kill()
 
@@ -33,10 +34,12 @@ def main_title():
 
 
 def title(caption):
+    """Заголовок"""
     pg.display.set_caption(caption)
 
 
 def theory(name):
+    """Теория"""
     f = open(name, 'r', encoding='utf-8')
     lines = ''.join(f.readlines())
     f.close()
@@ -44,6 +47,7 @@ def theory(name):
 
 
 def kill_15():
+    """Убивает 15 молекул"""
     k = 0
     for i in molecule_group:
         i.kill()

@@ -26,17 +26,20 @@ THEORY_TEXT = theory('lever.txt')
 
 
 def fon():
+    """рисует фон"""
     fon = pg.transform.scale(load_image('green.png'), (width, height))
     screen.blit(fon, (0, 0))
 
 
 def clear_group():
+    """Очищает группы"""
     global all_sprites_group
     for i in all_sprites_group:
         i.kill()
 
 
 def left_moment():
+    """Момент левого рычага"""
     F = 0
     for id in lever:
         if lever[id][0]:
@@ -45,6 +48,7 @@ def left_moment():
 
 
 def right_moment():
+    """Момент правого рычага"""
     F = 0
     for id in lever:
         if not lever[id][0]:
@@ -53,6 +57,7 @@ def right_moment():
 
 
 def show_parametrs():
+    """Показывает параметры"""
     font = pg.font.Font(None, 30)
     text = font.render(str(f"Момент силы правого плеча: {right_moment()}Н*м"), 1, BLACK)
     screen.blit(text, (10, 40))
@@ -61,8 +66,8 @@ def show_parametrs():
     screen.blit(text, (10, 10))
 
 
-# TODO исправить баг, что когда рычаг поворачивается, а точки нет
 def start_lever():
+    """Стартовая функция, начинает рычаг"""
     global N, T
     clear_group()
     run = True
@@ -74,7 +79,6 @@ def start_lever():
     BORDER = 10
     theory = Theory(10, height - 50, 20, "#00ff00")
     lever_sprite = Lever(BORDER, 250)
-    fulcrum = Fulcrum(393, 225)
     orient = True
     for i in range(20):
         Point((BORDER - 1) + 40 * i + 10, 250, i, orient)
@@ -85,6 +89,7 @@ def start_lever():
             lever[point.id] = [point.orientation, 10 - point.id, 0]
         else:
             lever[point.id] = [point.orientation, point.id - 9, 0]
+    Fulcrum(393, 225)
     moving = False
     Weight(40, 100, 'weight_5kg.png', 5)
     Weight(80, 100, 'weight_10kg.png', 10)
@@ -111,7 +116,6 @@ def start_lever():
                         offset_x = weight.rect.x - mouse_x
                         offset_y = weight.rect.y - mouse_y
                         break
-                print(event.pos)
 
             if event.type == pg.MOUSEBUTTONUP:
                 if theory.rect.collidepoint(event.pos):
@@ -137,17 +141,8 @@ def start_lever():
         m2 = right_moment()
         if m1 == m2:
             lever_sprite.equal()
-            for point_sprite in points_group:
-                point_sprite.equal()
         elif m1 > m2:
             lever_sprite.left()
-            i = 0
-            for point_sprite in points_group:
-                point_sprite.left()
-                point_sprite.move(i)
-                i += 1
         else:
             lever_sprite.right()
-            for point_sprite in points_group:
-                point_sprite.right()
         pg.display.flip()  # Обновление кадра

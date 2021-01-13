@@ -41,17 +41,22 @@ world = world(gravity=(0, -10)) # создание поля
 
 ground_body = world.CreateStaticBody(
     position=(0, 10),
-    shapes=polygonShape(box=(20, 0.5))
+    shapes=polygonShape(box=(20, 0.5)),
 )
 ground_body2 = world.CreateStaticBody(
     position=(37, 10),
-    shapes=polygonShape(box=(10, 0.5))
+    shapes=polygonShape(box=(10, 0.5)),
 )
 
 ground_body3 = world.CreateStaticBody(
     position=(0, 0),
     shapes=polygonShape(box=(50, 1))
+
 )
+
+body = world.CreateStaticBody(position=(20, 15))
+circle = body.CreateCircleFixture(radius=1, density=1, friction=0.3)
+
 
 def create_circle():
     for i in range(5, 40, 5):

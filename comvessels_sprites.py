@@ -60,6 +60,9 @@ class Vessel(pg.sprite.Sprite):
         self.liquid = liquid
         self.height_liquid = h * 100
 
+        self.flag = False
+        self.pos = 2
+
         self.image = pg.Surface((self.width, self.height), pg.SRCALPHA, 32)
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -69,4 +72,5 @@ class Vessel(pg.sprite.Sprite):
     def draw_liquid(self):
         pg.draw.rect(self.image, pg.Color(255, 255, 255), pg.Rect(0, 0, self.width, self.height))
         pg.draw.rect(self.image, self.liquid.color,
-                     pg.Rect(0, self.height - self.height_liquid, self.width, self.height_liquid))
+                     pg.Rect(0, self.height - self.pos, self.width, self.pos))
+        print(self.liquid.color)

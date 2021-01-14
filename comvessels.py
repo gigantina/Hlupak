@@ -66,6 +66,15 @@ def calculating_h2():
     return h
 
 
+def grow_liquid(lic):
+    if lic.pos < lic.height_liquid:
+        lic.pos += 1
+        lic.draw_liquid()
+    else:
+        lic.flag = False
+        lic.pos = 2
+
+
 def start_vessel():
     global r1, r2, h1, h2, p
     clear_group(all_sprites_group)
@@ -103,6 +112,25 @@ def start_vessel():
         time_delta = clock.tick(SPEED) / 1000.0
         theory_group.draw(screen)
 
+
+        """Плавное увеличение"""
+        for button in choice_group:
+            if button.side == 1:
+                first_vessel.liquid = button.liquid
+
+                r1 = button.liquid.r
+                first_vessel.height_liquid = h1 * 100
+                if first_vessel.flag:
+                    grow_liquid(first_vessel)
+            else:
+                second_vessel.liquid = button.liquid
+                r2 = button.liquid.r
+                second_vessel.height_liquid = h2 * 100
+                if second_vessel.flag:
+                    grow_liquid(second_vessel)
+
+
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 main_title()
@@ -118,13 +146,13 @@ def start_vessel():
                                 r1 = button.liquid.r
                                 h1 = calculating_h1()
                                 first_vessel.height_liquid = h1 * 100
-                                first_vessel.draw_liquid()
+                                first_vessel.flag = True
                             else:
                                 second_vessel.liquid = button.liquid
                                 r2 = button.liquid.r
                                 h2 = calculating_h2()
                                 second_vessel.height_liquid = h2 * 100
-                                second_vessel.draw_liquid()
+                                second_vessel.flag = True
 
             if event.type == pg.MOUSEBUTTONUP:
                 if theory.rect.collidepoint(event.pos):

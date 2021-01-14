@@ -81,7 +81,7 @@ def start_vessel():
     run = True
     title("Симулятор сообщающихся сосудов")
     fon()
-    SPEED = 60
+    SPEED = 45
     theory = Theory(10, height - 50, 20, "#00ff00")
     vessels = Vessels(380, 100)
     water = Liquid(pg.Color("#1CA3EC"), 1)
@@ -97,13 +97,13 @@ def start_vessel():
     p = r1 * h1 * 10000
     WHITE = pg.Color(255, 255, 255)
 
-    water_button_1 = Button(10, 120, WHITE, water, 1, "Вода")
-    mercury_button_1 = Button(120, 120, WHITE, mercury, 1, "Ртуть")
-    oil_button_1 = Button(230, 120, WHITE, oil, 1, "Нефть")
+    water_button_1 = Button(10, 120, WHITE, water, 1, "Вода", "#1CA3EC")
+    mercury_button_1 = Button(120, 120, WHITE, mercury, 1, "Ртуть", "#DBCECA")
+    oil_button_1 = Button(230, 120, WHITE, oil, 1, "Нефть", "#373A36")
 
-    water_button_2 = Button(10, 420, WHITE, water, 2, "Вода")
-    mercury_button_2 = Button(120, 420, WHITE, mercury, 2, "Ртуть")
-    oil_button_2 = Button(230, 420, WHITE, oil, 2, "Нефть")
+    water_button_2 = Button(10, 420, WHITE, water, 2, "Вода", "#1CA3EC")
+    mercury_button_2 = Button(120, 420, WHITE, mercury, 2, "Ртуть", "#DBCECA")
+    oil_button_2 = Button(230, 420, WHITE, oil, 2, "Нефть", "#373A36")
     while run:
         fon()
         all_sprites_group.update()
@@ -116,16 +116,9 @@ def start_vessel():
         """Плавное увеличение"""
         for button in choice_group:
             if button.side == 1:
-                first_vessel.liquid = button.liquid
-
-                r1 = button.liquid.r
-                first_vessel.height_liquid = h1 * 100
                 if first_vessel.flag:
                     grow_liquid(first_vessel)
             else:
-                second_vessel.liquid = button.liquid
-                r2 = button.liquid.r
-                second_vessel.height_liquid = h2 * 100
                 if second_vessel.flag:
                     grow_liquid(second_vessel)
 
@@ -144,6 +137,7 @@ def start_vessel():
                                 first_vessel.liquid = button.liquid
 
                                 r1 = button.liquid.r
+                                print(r1)
                                 h1 = calculating_h1()
                                 first_vessel.height_liquid = h1 * 100
                                 first_vessel.flag = True

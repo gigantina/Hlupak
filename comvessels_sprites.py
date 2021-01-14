@@ -31,7 +31,7 @@ class Vessels(pg.sprite.Sprite):
 
 class Button(pg.sprite.Sprite):
 
-    def __init__(self, x, y, color, liquid, side, text):
+    def __init__(self, x, y, color1, liquid, side, text, color2):
         super().__init__(all_sprites_group, choice_group)
         self.height = 30
         self.width = 100
@@ -43,11 +43,11 @@ class Button(pg.sprite.Sprite):
         self.rect.y = y
         self.side = side
 
-        pg.draw.rect(self.image, color, pg.Rect(0, 0, self.width, self.height))
+        pg.draw.rect(self.image, color1, pg.Rect(0, 0, self.width, self.height))
 
         font = pg.font.Font(None, 30)
         p = font.render(text, 1,
-                        (0, 0, 0))
+                        color2)
         self.image.blit(p, (12, 5))
 
 

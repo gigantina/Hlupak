@@ -97,13 +97,13 @@ def start_vessel():
     p = r1 * h1 * 10000
     WHITE = pg.Color(255, 255, 255)
 
-    water_button_1 = Button(10, 120, WHITE, water, 1, "Вода")
-    mercury_button_1 = Button(120, 120, WHITE, mercury, 1, "Ртуть")
-    oil_button_1 = Button(230, 120, WHITE, oil, 1, "Нефть")
+    water_button_1 = Button(10, 120, WHITE, water, 1, "Вода", "#1CA3EC")
+    mercury_button_1 = Button(120, 120, WHITE, mercury, 1, "Ртуть", "#DBCECA")
+    oil_button_1 = Button(230, 120, WHITE, oil, 1, "Нефть", "#373A36")
 
-    water_button_2 = Button(10, 420, WHITE, water, 2, "Вода")
-    mercury_button_2 = Button(120, 420, WHITE, mercury, 2, "Ртуть")
-    oil_button_2 = Button(230, 420, WHITE, oil, 2, "Нефть")
+    water_button_2 = Button(10, 420, WHITE, water, 2, "Вода", "#1CA3EC")
+    mercury_button_2 = Button(120, 420, WHITE, mercury, 2, "Ртуть", "#DBCECA")
+    oil_button_2 = Button(230, 420, WHITE, oil, 2, "Нефть", "#373A36")
     while run:
         fon()
         all_sprites_group.update()

@@ -35,9 +35,9 @@ page = 1
 gases_obj = ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", 1, start_gases)
 lever_obj = ObjectMenu(10, 300, "lever.png", "Симуляция рычага", 1, start_lever)
 real_gases_obj = ObjectMenu(400, 10, "real_gases.png", "Симуляция реального газа", 1, start_realistic_gases)
-magnet_obj = ObjectMenu(400, 300, "real_gases.png", "Симуляция магнитной стрелки", 1, start_magnet)
+magnet_obj = ObjectMenu(400, 300, "magnets.png", "Симуляция магнитной стрелки", 1, start_magnet)
 
-vessel_obj = ObjectMenu(10, 10, "gases.png", "Сообщающийся сосуды", 2, start_vessel)
+vessel_obj = ObjectMenu(10, 10, "vas.png", "Сообщающийся сосуды", 2, start_vessel)
 
 all_menu_obj = [gases_obj, lever_obj, real_gases_obj, magnet_obj, vessel_obj]
 

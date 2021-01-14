@@ -53,7 +53,7 @@ def right_moment():
 
 
 def show_parametrs():
-    font = pg.font.Font(None, 30)
+    font = get_font(30)
     text = font.render(str(f"Момент силы правого плеча: {right_moment()}Н*м"), 1, BLACK)
     screen.blit(text, (10, 40))
     text = font.render(str(f"Момент силы левого плеча: {left_moment()}Н*м"), 1,

@@ -6,6 +6,11 @@ import pygame as pg
 from gases_sprites import molecule_group
 
 
+def get_font(size):
+    font = None  # data/FuturaPT - этот не подошел, в переспективе можно найти шрифт
+    return pg.font.Font(font, size)
+
+
 def clear_group(all_sprites_group):
     for i in all_sprites_group:
         i.kill()

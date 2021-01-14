@@ -59,7 +59,7 @@ def create_molecule():
 
 
 def show_parametrs():
-    font = pg.font.Font(None, 30)
+    font = get_font(30)
     text = font.render(str(f"Температура: {T}K/ {round(T - 273.15)}C"), 1, BLACK)
     screen.blit(text, (width - 300, 10))
     text = font.render(str(f"Скорость молекул: {round(calculating_the_average_speed_of_molecules(K, M, T))}м/с"), 1,

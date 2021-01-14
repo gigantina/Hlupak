@@ -45,7 +45,7 @@ class Button(pg.sprite.Sprite):
 
         pg.draw.rect(self.image, color, pg.Rect(0, 0, self.width, self.height))
 
-        font = pg.font.Font(None, 30)
+        font = get_font(30)
         p = font.render(text, 1,
                         (0, 0, 0))
         self.image.blit(p, (12, 5))

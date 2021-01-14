@@ -20,7 +20,7 @@ class ObjectMenu(pg.sprite.Sprite):
         self.image.blit(image, (0, 20))
         self.rect = pg.Rect(x, y, 500, 300)
         self.func = func
-        font = pg.font.Font(None, 30)
+        font = get_font(30)
         text = font.render(desc, 1, (201, 37, 237))
         self.image.blit(text, (40, 0))
         self.page = page

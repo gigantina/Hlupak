@@ -30,7 +30,7 @@ def fon():
 
 
 def show_parametrs(parametr):
-    font = pg.font.Font(None, 30)
+    font = get_font(30)
     text = font.render(str(parametr), 1, BLACK)
     screen.blit(text, (10, 40))
 

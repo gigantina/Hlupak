@@ -34,7 +34,7 @@ def fon():
 
 
 def show_parametrs():
-    font = pg.font.Font(None, 30)
+    font = get_font(30)
     text = font.render(str(f"Давление пр. сосуда: {p / 1000}КПа"), 1, BLACK)
     screen.blit(text, (width - 400, 10))
     text = font.render(str(f"Плот. пр. жидкости: {r2}г/см3"), 1,

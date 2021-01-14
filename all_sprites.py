@@ -1,5 +1,6 @@
 import pygame as pg
 import groups
+import functions
 from functions import *
 
 horizontal_borders, vertical_borders, all_sprites_group = groups.create_default_groups()
@@ -39,7 +40,7 @@ class Theory(pg.sprite.Sprite):
         pg.draw.circle(self.image, pg.Color(color),
                        (radius, radius), radius)
         self.rect = pg.Rect(x, y, 2 * radius, 2 * radius)
-        font = pg.font.Font(None, 30)
+        font = functions.get_font(30)
         text = font.render(str(f"?"), 1, (0, 0, 0))
         self.image.blit(text, (13, 10))
 
@@ -54,7 +55,7 @@ class Theory(pg.sprite.Sprite):
         text = text.split("\n")
         y = 100
         for t in text:
-            font = pg.font.Font(None, 30)
+            font = functions.get_font(30).
             text = font.render(t, 1, (0, 0, 0))
             screen.blit(text, (60, y))
             y += 30

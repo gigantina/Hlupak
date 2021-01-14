@@ -27,6 +27,12 @@ def create_magnet_groups():
     compass_group = pg.sprite.Group()
     return lode_group, arrow_group, compass_group
 
+def create_vessel_groups():
+    vessel_group = pg.sprite.Group()
+    liquid_group = pg.sprite.Group()
+    choice_group = pg.sprite.Group()
+    return vessel_group, liquid_group, choice_group
+
 
 def create_theory_group():
     t = pg.sprite.Group()

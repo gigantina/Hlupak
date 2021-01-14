@@ -21,7 +21,7 @@ class Lode(pg.sprite.Sprite):
         self.width = 300
         self.height = 75
 
-        self.is_rotate = True
+        self.is_rotate = False
         self.image = pg.Surface((self.width, self.height), pg.SRCALPHA)
         self.rect = pg.Rect(x, y, 300, 75)
         self.rect.x = x
@@ -54,15 +54,15 @@ class Arrow(pg.sprite.Sprite):
         self.rect.y = y
         self.orig = self.image
         self.is_changed = False
+        self.addictional = 0
 
     def change(self):
-        if self.is_changed:
-            self.image = pg.transform.rotate(self.orig, 180)
-            self.draw_arrow()
-        else:
-            self.image = pg.transform.rotate(self.orig, 180)
-            self.draw_arrow(RED, BLUE)
         self.is_changed = not self.is_changed
+        if self.is_changed:
+            self.addictional = 180
+        else:
+            self.addictional = 0
+
 
     def polar(self, coord):
         x, y, w, h = self.rect

@@ -21,7 +21,7 @@ RED = (255, 0, 0)
 changing_pos = False
 BLACK = (0, 0, 0)
 
-THEORY_TEXT = theory('lever.txt')
+THEORY_TEXT = theory('magnet.txt')
 
 
 def fon():
@@ -29,13 +29,10 @@ def fon():
     screen.blit(fon, (0, 0))
 
 
-def show_parametrs():
+def show_parametrs(parametr):
     font = pg.font.Font(None, 30)
-    text = font.render(str(f""), 1, BLACK)
+    text = font.render(str(parametr), 1, BLACK)
     screen.blit(text, (10, 40))
-    text = font.render(str(""), 1,
-                       BLACK)
-    screen.blit(text, (10, 10))
 
 
 def start_magnet():
@@ -48,8 +45,9 @@ def start_magnet():
     fon()
     SPEED = 60
     LENGHT = 50
+
     last_angle = 0
-    lode = Lode(20, 20)
+    lode = Lode(20, 120)
     compass = Compass(550, 200)
     arrow = Arrow(625, 245, 50)
     moving = False
@@ -59,19 +57,18 @@ def start_magnet():
         all_sprites_group.update()
         all_sprites_group.draw(screen)
         x, y, w, h = lode.rect
-        point = x+w, y+(lode.rect.h // 2)
+        point = x + w, y + (lode.rect.h // 2)
         radius, angle = arrow.polar(point)
 
         if radius < 250:
-            arrow.rotate(-angle-90)
-            last_angle = angle-90
+            arrow.rotate(-angle - 90 + arrow.addictional)
+            show_parametrs('Стрелка притягивается к магниту')
         else:
-                arrow.rotate(0)
-            # TODO плавный переход стрелки на исходную позицию
+            arrow.rotate(0)
+            show_parametrs('Магнит находится слишком далеко, стрелка не притягивается')
+        # TODO плавный переход стрелки на исходную позицию
         time_delta = clock.tick(SPEED) / 1000.0
         theory_group.draw(screen)
-
-        show_parametrs()
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -100,8 +97,5 @@ def start_magnet():
                     mouse_x, mouse_y = event.pos
                     lode.rect.x = mouse_x + offset_x
                     lode.rect.y = mouse_y + offset_y
-
-
-
 
         pg.display.flip()  # Обновление кадра

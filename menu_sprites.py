@@ -11,8 +11,8 @@ menu_group = pg.sprite.Group()
 class ObjectMenu(pg.sprite.Sprite):
     """Класс объекта меню"""
 
-    def __init__(self, x, y, image_path, desc, func):
-        super().__init__(menu_group)
+    def __init__(self, x, y, image_path, desc, page, func):
+        super().__init__()
         image = load_image(image_path)
         image = pg.transform.scale(image, (350, 250))
         self.image = pg.Surface((500, 300),
@@ -23,6 +23,7 @@ class ObjectMenu(pg.sprite.Sprite):
         font = pg.font.Font(None, 30)
         text = font.render(desc, 1, (201, 37, 237))
         self.image.blit(text, (40, 0))
+        self.page = page
 
     def update(self, pos) -> None:
         x, y = pos
@@ -30,7 +31,4 @@ class ObjectMenu(pg.sprite.Sprite):
             self.func()
 
 
-ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", start_gases)
-ObjectMenu(10, 300, "lever.png", "Симуляция рычага", start_lever)
-ObjectMenu(400, 10, "real_gases.png", "Симуляция реального газа", start_realistic_gases)
-ObjectMenu(400, 300, "real_gases.png", "Симуляция магнитной стрелки", start_magnet)
+

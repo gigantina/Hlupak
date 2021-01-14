@@ -4,8 +4,12 @@ import os
 from functions import main_title
 import sys
 import random
-
-from menu_sprites import menu_group
+from gases import start_gases
+from lever import start_lever
+from realistic_gases import start_realistic_gases
+from magnet import start_magnet
+from comvessels import start_vessel
+from menu_sprites import ObjectMenu, menu_group
 
 pg.init()
 
@@ -26,6 +30,16 @@ RED = (255, 0, 0)
 
 changing_pos = False
 BLACK = (0, 0, 0)
+page = 1
+
+gases_obj = ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", 1, start_gases)
+lever_obj = ObjectMenu(10, 300, "lever.png", "Симуляция рычага", 1, start_lever)
+real_gases_obj = ObjectMenu(400, 10, "real_gases.png", "Симуляция реального газа", 1, start_realistic_gases)
+magnet_obj = ObjectMenu(400, 300, "real_gases.png", "Симуляция магнитной стрелки", 1, start_magnet)
+
+vessel_obj = ObjectMenu(10, 10, "gases.png", "Сообщающийся сосуды", 2, start_vessel)
+
+all_menu_obj = [gases_obj, lever_obj, real_gases_obj, magnet_obj, vessel_obj]
 
 
 def load_image(name, colorkey=None):
@@ -38,19 +52,21 @@ def load_image(name, colorkey=None):
     return image
 
 
-# Немного теории, мы делаем идеальный газ, где молекулы не сталкиваются друг с другом
-
-
 def fon():
     # fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
     # screen.blit(fon, (0, 0))
     screen.fill((255, 255, 255))
 
 
-def show_menu():
-    pass
+def show_menu(page=1):
+    for i in all_menu_obj:
+        if i.page != page:
+            i.kill()
+        else:
+            menu_group.add(i)
 
 
+show_menu(1)
 SPEED = 60
 while run:
     fon()
@@ -68,6 +84,12 @@ while run:
                 pass
             if event.key == pg.K_UP:
                 pass
+            if event.key == pg.K_RIGHT:
+                page = 2
+                show_menu(page)
+            if event.key == pg.K_LEFT:
+                page = 1
+                show_menu(page)
 
     pg.display.flip()  # Обновление кадра
 
@@ -75,4 +97,3 @@ while run:
 # TODO можно сделать гарелку, у которой есть анимация, надо добавить анимацию
 # TODO сделать симуляцию падающий шариков
 # TODO Добавить частицы итд
-# TODO Сделать симулятор магнитной стрелки

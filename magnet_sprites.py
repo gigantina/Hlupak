@@ -23,7 +23,7 @@ class Lode(pg.sprite.Sprite):
 
         self.is_rotate = False
         self.image = pg.Surface((self.width, self.height), pg.SRCALPHA)
-        self.rect = pg.Rect(x, y, 300, 75)
+        self.rect = pg.Rect(x, y, self.width, self.height)
         self.rect.x = x
         self.rect.y = y
         self.x_des = 0

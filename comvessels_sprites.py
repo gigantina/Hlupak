@@ -73,4 +73,3 @@ class Vessel(pg.sprite.Sprite):
         pg.draw.rect(self.image, pg.Color(255, 255, 255), pg.Rect(0, 0, self.width, self.height))
         pg.draw.rect(self.image, self.liquid.color,
                      pg.Rect(0, self.height - self.pos, self.width, self.pos))
-        print(self.liquid.color)

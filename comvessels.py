@@ -81,7 +81,7 @@ def start_vessel():
     run = True
     title("Симулятор сообщающихся сосудов")
     fon()
-    SPEED = 60
+    SPEED = 45
     theory = Theory(10, height - 50, 20, "#00ff00")
     vessels = Vessels(380, 100)
     water = Liquid(pg.Color("#1CA3EC"), 1)
@@ -116,16 +116,9 @@ def start_vessel():
         """Плавное увеличение"""
         for button in choice_group:
             if button.side == 1:
-                first_vessel.liquid = button.liquid
-
-                r1 = button.liquid.r
-                first_vessel.height_liquid = h1 * 100
                 if first_vessel.flag:
                     grow_liquid(first_vessel)
             else:
-                second_vessel.liquid = button.liquid
-                r2 = button.liquid.r
-                second_vessel.height_liquid = h2 * 100
                 if second_vessel.flag:
                     grow_liquid(second_vessel)
 
@@ -144,6 +137,7 @@ def start_vessel():
                                 first_vessel.liquid = button.liquid
 
                                 r1 = button.liquid.r
+                                print(r1)
                                 h1 = calculating_h1()
                                 first_vessel.height_liquid = h1 * 100
                                 first_vessel.flag = True

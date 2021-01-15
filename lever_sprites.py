@@ -28,10 +28,10 @@ class Lever(pg.sprite.Sprite):
         self.image = pg.transform.rotate(self.orig, angle)
 
     def right(self):
-        self.rotate(-10)
+        self.rotate(-2)
 
     def left(self):
-        self.rotate(10)
+        self.rotate(2)
 
     def equal(self):
         self.rotate(0)
@@ -67,9 +67,8 @@ class Fulcrum(pg.sprite.Sprite):
 class Point(pg.sprite.Sprite):
     def __init__(self, x, y, id, orientation):
         super().__init__(all_sprites_group, points_group)
-        self.image = pg.Surface((3, 30)).convert_alpha()
+        self.image = pg.Surface((3, 30), pg.SRCALPHA)
         self.rect = pg.Rect(x, y, 3, 30)
-        self.color = (0, 0, 0)
         self.colored = False
         self.id = id
         self.orientation = orientation
@@ -84,10 +83,10 @@ class Point(pg.sprite.Sprite):
         self.image = pg.transform.rotate(self.orig, angle)
 
     def right(self):
-        self.rotate(-10)
+        self.rotate(-1)
 
     def left(self):
-        self.rotate(10)
+        self.rotate(1)
 
     def equal(self):
         self.rotate(0)

@@ -55,7 +55,7 @@ class Theory(pg.sprite.Sprite):
         text = text.split("\n")
         y = 100
         for t in text:
-            font = functions.get_font(30).
+            font = functions.get_font(30)
             text = font.render(t, 1, (0, 0, 0))
             screen.blit(text, (60, y))
             y += 30

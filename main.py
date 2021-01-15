@@ -4,6 +4,7 @@ import os
 from functions import main_title
 import sys
 import random
+from functions import *
 from gases import start_gases
 from lever import start_lever
 from realistic_gases import start_realistic_gases
@@ -64,12 +65,16 @@ def show_menu(page=1):
             i.kill()
         else:
             menu_group.add(i)
+    font = get_font(20)
+    text = font.render("Для перемещения по меню используйте стрелки", 1, BLACK)
+    screen.blit(text, (450, 580))
 
 
-show_menu(1)
+
 SPEED = 60
 while run:
     fon()
+    show_menu(page)
     time_delta = clock.tick(SPEED) / 1000.0
     menu_group.draw(screen)
     for event in pg.event.get():
@@ -86,10 +91,8 @@ while run:
                 pass
             if event.key == pg.K_RIGHT:
                 page = 2
-                show_menu(page)
             if event.key == pg.K_LEFT:
                 page = 1
-                show_menu(page)
 
     pg.display.flip()  # Обновление кадра
 

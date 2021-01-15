@@ -88,6 +88,9 @@ def start_lever():
     moving = False
     Weight(40, 100, 'weight_5kg.png', 5)
     Weight(80, 100, 'weight_10kg.png', 10)
+    Weight(120, 100, 'weight_3kg.png', 3)
+    Weight(160, 100, 'weight_20kg.png', 20)
+    Weight(200, 100, 'weight_2kg.png', 2)
     while run:
         fon()
         all_sprites_group.update()
@@ -137,15 +140,8 @@ def start_lever():
         m2 = right_moment()
         if m1 == m2:
             lever_sprite.equal()
-            for point_sprite in points_group:
-                point_sprite.equal()
         elif m1 > m2:
             lever_sprite.left()
-            i = 0
-            for point_sprite in points_group:
-                point_sprite.left()
-                point_sprite.move(i)
-                i += 1
         else:
             lever_sprite.right()
             for point_sprite in points_group:

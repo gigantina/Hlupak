@@ -16,12 +16,12 @@
 Скриншоты:
 ---------
 Симулятор идеального газа: \
-![alt text](data/gases.png "")
+![alt text](data/images/gases.png "")
 Симулятор реального газа: \
-![alt text](data/real_gases.png "")
+![alt text](data/images/real_gases.png "")
 Симулятор рычага: \
-![alt text](data/lever.png "") \
+![alt text](data/images/lever.png "") \
 Симулятор магнитной стрелки: \
-![alt text](data/magnets.png "")
+![alt text](data/images/magnets.png "")
 Симулятор сообщающихся сосудов:\
-![alt text](data/vas.png "")
+![alt text](data/images/vas.png "")

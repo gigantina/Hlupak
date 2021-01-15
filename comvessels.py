@@ -1,5 +1,5 @@
 from functions import *
-from all_sprites import Border, load_image, theory_group, Theory, all_sprites_group
+from all_sprites import Border, theory_group, Theory, all_sprites_group
 from comvessels_sprites import Vessels, Button, Liquid, Vessel, choice_group
 
 pg.init()

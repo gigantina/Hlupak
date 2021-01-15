@@ -2,6 +2,8 @@ import pygame as pg
 import random
 import groups
 import all_sprites
+import functions
+from functions import *
 
 all_sprites_group = all_sprites.all_sprites_group
 horizontal_borders, vertical_borders = all_sprites.horizontal_borders, all_sprites.vertical_borders

@@ -1,6 +1,5 @@
 import pygame as pg
 import math
-from all_sprites import load_image
 import random
 from functions import *
 from all_sprites import Border, all_sprites_group, theory_group, Theory

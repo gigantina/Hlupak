@@ -1,6 +1,7 @@
 from functions import *
-from all_sprites import Border, load_image, theory_group, Theory, all_sprites_group
+from all_sprites import Border, theory_group, Theory, all_sprites_group
 from lever_sprites import Lever, Point, Fulcrum, Weight, weights_group, lever_group, fulcrum_group, points_group
+import functions
 
 pg.init()
 

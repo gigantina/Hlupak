@@ -5,15 +5,6 @@ from functions import *
 
 horizontal_borders, vertical_borders, all_sprites_group = groups.create_default_groups()
 
-def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
-    # если файл не существует, то выходим
-    if not os.path.isfile(fullname):
-        print(f"Файл с изображением '{fullname}' не найден")
-        sys.exit()
-    image = pg.image.load(fullname)
-    return image
-
 class Border(pg.sprite.Sprite):
     # строго вертикальный или строго горизонтальный отрезок
     def __init__(self, x1, y1, x2, y2):
@@ -47,7 +38,7 @@ class Theory(pg.sprite.Sprite):
     def fon(self, screen):
         """изменяет фон"""
         size = width, height = 800, 600
-        fon = pg.transform.scale(load_image('blue-snow.png'), (width, height))
+        fon = pg.transform.scale(functions.load_image('blue-snow.png'), (width, height))
         screen.blit(fon, (0, 0))
 
     def draw_text(self, text, screen):
@@ -62,7 +53,8 @@ class Theory(pg.sprite.Sprite):
 
     def open_theory(self, screen, text):
         """Открывает окно с теорией"""
-        pg.display.set_caption("Немного теории")
+        last_capt = pg.display.get_caption()[0]
+        functions.title("Немного теории")
         run = True
         self.fon(screen)
         self.draw_text(text, screen)
@@ -72,5 +64,6 @@ class Theory(pg.sprite.Sprite):
             for event in pg.event.get():
                 if event.type == pg.MOUSEBUTTONUP or event.type == pg.QUIT or event.type == pg.KEYUP \
                         and event.key == pg.K_ESCAPE:
+                    functions.title(last_capt)
                     run = False
             pg.display.flip()

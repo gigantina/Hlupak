@@ -3,6 +3,7 @@ import sys
 import os
 import random
 import groups
+import functions
 from functions import *
 import all_sprites
 
@@ -85,7 +86,7 @@ class Compass(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, compass_group)
-        self.image = all_sprites.load_image("compass.png")
+        self.image = functions.load_image("compass.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

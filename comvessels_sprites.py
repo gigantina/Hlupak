@@ -5,6 +5,7 @@ import random
 import groups
 from functions import *
 import all_sprites
+import functions
 
 
 class Liquid():
@@ -23,7 +24,7 @@ class Vessels(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, vessel_group)
-        self.image = all_sprites.load_image("vessel.png")
+        self.image = functions.load_image("vessel.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

@@ -1,5 +1,5 @@
 from functions import *
-from all_sprites import Border, load_image, theory_group, Theory, all_sprites_group
+from all_sprites import Border, theory_group, Theory, all_sprites_group
 from magnet_sprites import Lode, lode_group, Compass, compass_group, Arrow, arrow_group
 
 pg.init()

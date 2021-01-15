@@ -42,10 +42,26 @@ def title(caption):
 
 
 def theory(name):
-    f = open(name, 'r', encoding='utf-8')
-    lines = ''.join(f.readlines())
-    f.close()
+    fullname = os.path.join('data/theory', name)
+    # если файл не существует, то выходим
+    if not os.path.isfile(fullname):
+        print(f"Файл с теорией '{fullname}' не найден")
+        sys.exit()
+    else:
+        f = open(fullname, 'r', encoding='utf-8')
+        lines = ''.join(f.readlines())
+        f.close()
     return lines
+
+
+def load_image(name, colorkey=None):
+    fullname = os.path.join('data/images', name)
+    # если файл не существует, то выходим
+    if not os.path.isfile(fullname):
+        print(f"Файл с изображением '{fullname}' не найден")
+        sys.exit()
+    image = pg.image.load(fullname)
+    return image
 
 
 def kill_15():

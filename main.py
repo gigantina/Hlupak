@@ -43,14 +43,7 @@ vessel_obj = ObjectMenu(10, 10, "vas.png", "Сообщающийся сосуд�
 all_menu_obj = [gases_obj, lever_obj, real_gases_obj, magnet_obj, vessel_obj]
 
 
-def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
-    # если файл не существует, то выходим
-    if not os.path.isfile(fullname):
-        print(f"Файл с изображением '{fullname}' не найден")
-        sys.exit()
-    image = pg.image.load(fullname)
-    return image
+
 
 
 def fon():

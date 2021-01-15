@@ -1,6 +1,8 @@
 import pygame as pg
 import os
 import sys
+from functions import *
+import functions
 
 from Box2D.b2 import world, polygonShape, circleShape, staticBody, dynamicBody
 
@@ -8,16 +10,6 @@ PPM = 20.0
 SPEED = 60
 
 TIME_STEP = 1.0 / SPEED
-
-def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
-    # если файл не существует, то выходим
-    if not os.path.isfile(fullname):
-        print(f"Файл с изображением '{fullname}' не найден")
-        sys.exit()
-    image = pg.image.load(fullname)
-    return image
-
 
 pg.init()
 

@@ -5,6 +5,7 @@ import random
 import groups
 from functions import *
 import all_sprites
+import functions
 
 all_sprites_group = all_sprites.all_sprites_group
 lever_group, weights_group, fulcrum_group, points_group = groups.create_lever_groups()
@@ -15,7 +16,7 @@ class Lever(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, lever_group)
-        self.image = all_sprites.load_image("lever_sprite.png").convert_alpha()
+        self.image = functions.load_image("lever_sprite.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -42,7 +43,7 @@ class Weight(pg.sprite.Sprite):
 
     def __init__(self, x, y, image_path, value):
         super().__init__(all_sprites_group, weights_group)
-        self.image = all_sprites.load_image(image_path)
+        self.image = functions.load_image(image_path)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -58,7 +59,7 @@ class Fulcrum(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__(all_sprites_group, lever_group)
-        self.image = all_sprites.load_image("fulcrum.png")
+        self.image = functions.load_image("fulcrum.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

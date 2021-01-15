@@ -78,10 +78,12 @@ def start_realistic_gases():
     SPEED = 60
     create_molecule()
     fon()
+    pause = False
     theory = Theory(10, height - 50, 20, "#00ff00")
     while run:
         fon()
-        all_sprites_group.update(True)
+        if not pause:
+            all_sprites_group.update(True)
         all_sprites_group.draw(screen)
 
         time_delta = clock.tick(SPEED) / 1000.0
@@ -112,6 +114,8 @@ def start_realistic_gases():
                 if event.key == pg.K_UP:
                     T = change_t(10, T)
                     SPEED += 5
+                if event.key == pg.K_SPACE:
+                    pause = not pause
 
         pg.display.flip()  # Обновление кадра
 

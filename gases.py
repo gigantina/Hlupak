@@ -70,18 +70,21 @@ def show_parametrs():
 
 
 def start_gases():
+    """Начинает симуляцию идеального газа"""
     global N, T
     clear_group(all_sprites_group)
     borders(width, height)
     run = True
-    title("Симулятор газа")
+    title("Симулятор идеального газа")
     SPEED = 60
     create_molecule()
     fon()
+    pause = False
     theory = Theory(10, height - 50, 20, "#00ff00")
     while run:
         fon()
-        all_sprites_group.update()
+        if not pause:
+            all_sprites_group.update()
         all_sprites_group.draw(screen)
 
         time_delta = clock.tick(SPEED) / 1000.0
@@ -113,6 +116,8 @@ def start_gases():
                 if event.key == pg.K_UP:
                     T = change_t(10, T)
                     SPEED += 5
+                if event.key == pg.K_SPACE:
+                    pause = not pause
 
         pg.display.flip()  # Обновление кадра
 

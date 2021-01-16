@@ -33,6 +33,12 @@ changing_pos = False
 BLACK = (0, 0, 0)
 page = 1
 
+
+
+sound1 = pg.mixer.Sound('data/music/Sonne.mp3')
+pg.mixer.music.set_volume(0.2)
+sound1.play(-1)
+
 gases_obj = ObjectMenu(10, 10, "gases.png", "Симуляция идеального газа", 1, start_gases)
 lever_obj = ObjectMenu(10, 300, "lever.png", "Симуляция рычага", 1, start_lever)
 real_gases_obj = ObjectMenu(400, 10, "real_gases.png", "Симуляция реального газа", 1, start_realistic_gases)
@@ -76,7 +82,7 @@ while run:
 
         if event.type == pg.MOUSEBUTTONUP:
             if event.button == 1:
-                menu_group.update(event.pos)
+                menu_group.update(event.pos, sound1)
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_DOWN:
                 pass

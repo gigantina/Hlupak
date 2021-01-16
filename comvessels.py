@@ -27,6 +27,7 @@ BLACK = (0, 0, 0)
 
 THEORY_TEXT = theory('vessels.txt')
 
+music = False
 
 def fon():
     fon = pg.transform.scale(load_image('green.png'), (width, height))
@@ -75,13 +76,23 @@ def grow_liquid(lic):
         lic.pos = 2
 
 
+def start_music():
+    global music
+    if not music:
+        pg.mixer.music.stop()
+        sound1 = pg.mixer.Sound('data/music/Benzin.mp3')
+        pg.mixer.music.set_volume(0.2)
+        sound1.play()
+        music = True
+
 def start_vessel():
-    global r1, r2, h1, h2, p
+    global r1, r2, h1, h2, p, music
     clear_group(all_sprites_group)
     run = True
     title("Симулятор сообщающихся сосудов")
     fon()
     SPEED = 45
+    music = False
     theory = Theory(10, height - 50, 20, "#00ff00")
     vessels = Vessels(380, 100)
     water = Liquid(pg.Color("#1CA3EC"), 1)
@@ -96,6 +107,7 @@ def start_vessel():
 
     p = r1 * h1 * 10000
     WHITE = pg.Color(255, 255, 255)
+
 
     water_button_1 = Button(10, 120, WHITE, water, 1, "Вода", "#1CA3EC")
     mercury_button_1 = Button(120, 120, WHITE, mercury, 1, "Ртуть", "#DBCECA")
@@ -137,7 +149,8 @@ def start_vessel():
                                 first_vessel.liquid = button.liquid
 
                                 r1 = button.liquid.r
-                                print(r1)
+                                if button.liquid == oil:
+                                    start_music()
                                 h1 = calculating_h1()
                                 first_vessel.height_liquid = h1 * 100
                                 first_vessel.flag = True
@@ -145,6 +158,9 @@ def start_vessel():
                                 second_vessel.liquid = button.liquid
                                 r2 = button.liquid.r
                                 h2 = calculating_h2()
+
+                                if button.liquid == oil:
+                                    start_music()
                                 second_vessel.height_liquid = h2 * 100
                                 second_vessel.flag = True
 

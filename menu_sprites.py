@@ -25,10 +25,12 @@ class ObjectMenu(pg.sprite.Sprite):
         self.image.blit(text, (40, 0))
         self.page = page
 
-    def update(self, pos) -> None:
+    def update(self, pos, music) -> None:
         x, y = pos
         if self.rect.collidepoint(x, y):
+            music.stop()
             self.func()
+            music.play(-1)
 
 
 

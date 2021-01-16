@@ -62,7 +62,7 @@ class Vessel(pg.sprite.Sprite):
         self.height_liquid = h * 100
 
         self.flag = False
-        self.pos = 2
+        self.pos = 1
 
         self.image = pg.Surface((self.width, self.height), pg.SRCALPHA, 32)
         self.rect = self.image.get_rect()

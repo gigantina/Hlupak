@@ -2,19 +2,23 @@ from functions import *
 from all_sprites import Border, theory_group, Theory, all_sprites_group
 from comvessels_sprites import Vessels, Button, Liquid, Vessel, choice_group
 
-pg.init()
 
-pg.display.set_caption("Симулятор сообщающихся сосудов")  # заголовок
+def init():
+    global width, height, screen, run, clock
+    pg.init()
 
-size = width, height = 800, 600
+    pg.display.set_caption("Симулятор сообщающихся сосудов")  # заголовок
 
-screen = pg.display.set_mode(size)
+    size = width, height = 800, 600
 
-pg.display.update()
+    screen = pg.display.set_mode(size)
 
-run = True  # переменна, с помощью ее можно выходить из цикла
+    pg.display.update()
 
-clock = pg.time.Clock()
+    run = True  # переменна, с помощью ее можно выходить из цикла
+
+    clock = pg.time.Clock()
+
 
 RED = (255, 0, 0)
 
@@ -28,6 +32,7 @@ BLACK = (0, 0, 0)
 THEORY_TEXT = theory('vessels.txt')
 
 music = False
+
 
 def fon():
     fon = pg.transform.scale(load_image('green.png'), (width, height))
@@ -85,8 +90,10 @@ def start_music():
         sound1.play()
         music = True
 
+
 def start_vessel():
     global r1, r2, h1, h2, p, music
+    init()
     clear_group(all_sprites_group)
     run = True
     title("Симулятор сообщающихся сосудов")
@@ -108,7 +115,6 @@ def start_vessel():
     p = r1 * h1 * 10000
     WHITE = pg.Color(255, 255, 255)
 
-
     water_button_1 = Button(10, 120, WHITE, water, 1, "Вода", "#1CA3EC")
     mercury_button_1 = Button(120, 120, WHITE, mercury, 1, "Ртуть", "#DBCECA")
     oil_button_1 = Button(230, 120, WHITE, oil, 1, "Нефть", "#373A36")
@@ -118,12 +124,12 @@ def start_vessel():
     oil_button_2 = Button(230, 420, WHITE, oil, 2, "Нефть", "#373A36")
     while run:
         fon()
+
         all_sprites_group.update()
         all_sprites_group.draw(screen)
 
         time_delta = clock.tick(SPEED) / 1000.0
         theory_group.draw(screen)
-
 
         """Плавное увеличение"""
         for button in choice_group:
@@ -133,8 +139,6 @@ def start_vessel():
             else:
                 if second_vessel.flag:
                     grow_liquid(second_vessel)
-
-
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -171,3 +175,4 @@ def start_vessel():
         show_parametrs()
 
         pg.display.flip()  # Обновление кадра
+    pg.quit()

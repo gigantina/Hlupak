@@ -2,19 +2,23 @@ from functions import *
 from all_sprites import Border, theory_group, Theory, all_sprites_group
 from magnet_sprites import Lode, lode_group, Compass, compass_group, Arrow, arrow_group
 
-pg.init()
 
-pg.display.set_caption("Симулятор магнитной стрелки")  # заголовок
+def init():
+    global width, height, screen, run, clock
+    pg.init()
 
-size = width, height = 800, 600
+    pg.display.set_caption("Симулятор магнитной стрелки")  # заголовок
 
-screen = pg.display.set_mode(size)
+    size = width, height = 800, 600
 
-pg.display.update()
+    screen = pg.display.set_mode(size)
 
-run = True  # переменна, с помощью ее можно выходить из цикла
+    pg.display.update()
 
-clock = pg.time.Clock()
+    run = True  # переменна, с помощью ее можно выходить из цикла
+
+    clock = pg.time.Clock()
+
 
 RED = (255, 0, 0)
 
@@ -37,6 +41,7 @@ def show_parametrs(parametr):
 
 def start_magnet():
     global N, T
+    init()
     clear_group(all_sprites_group)
     run = True
     title("Симулятор магнитной стрелки")
@@ -99,3 +104,4 @@ def start_magnet():
                     lode.rect.y = mouse_y + offset_y
 
         pg.display.flip()  # Обновление кадра
+    pg.quit()

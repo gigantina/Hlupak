@@ -3,19 +3,21 @@ from all_sprites import Border, theory_group, Theory, all_sprites_group
 from lever_sprites import Lever, Point, Fulcrum, Weight, weights_group, lever_group, fulcrum_group, points_group
 import functions
 
-pg.init()
+def init():
+    global width, height, screen, run, clock
+    pg.init()
 
-pg.display.set_caption("Симулятор рычага")  # заголовок
+    pg.display.set_caption("Симулятор рычага")  # заголовок
 
-size = width, height = 800, 600
+    size = width, height = 800, 600
 
-screen = pg.display.set_mode(size)
+    screen = pg.display.set_mode(size)
 
-pg.display.update()
+    pg.display.update()
 
-run = True  # переменна, с помощью ее можно выходить из цикла
+    run = True  # переменна, с помощью ее можно выходить из цикла
 
-clock = pg.time.Clock()
+    clock = pg.time.Clock()
 
 RED = (255, 0, 0)
 
@@ -65,6 +67,7 @@ def show_parametrs():
 # TODO исправить баг, что когда рычаг поворачивается, а точки нет
 def start_lever():
     global N, T
+    init()
     clear_group()
     run = True
     title("Симулятор рычага")
@@ -115,7 +118,6 @@ def start_lever():
                         offset_x = weight.rect.x - mouse_x
                         offset_y = weight.rect.y - mouse_y
                         break
-                print(event.pos)
 
             if event.type == pg.MOUSEBUTTONUP:
                 if theory.rect.collidepoint(event.pos):
@@ -148,3 +150,5 @@ def start_lever():
             for point_sprite in points_group:
                 point_sprite.right()
         pg.display.flip()  # Обновление кадра
+    pg.display.flip()
+    pg.quit()

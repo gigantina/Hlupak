@@ -5,18 +5,20 @@ from functions import *
 from all_sprites import Border, all_sprites_group, theory_group, Theory
 from gases_sprites import Molecule, molecule_group
 
-pg.init()
+def init():
+    global width, height, screen, run, clock
+    pg.init()
 
-size = width, height = 800, 600
+    size = width, height = 800, 600
 
-screen = pg.display.set_mode(size)
+    screen = pg.display.set_mode(size)
 
-pg.display.update()
+    pg.display.update()
 
-run = True  # переменна, с помощью ее можно выходить из цикла
+    run = True  # переменна, с помощью ее можно выходить из цикла
 
-"""А вот тут будет волшебство)"""
-clock = pg.time.Clock()
+    """А вот тут будет волшебство)"""
+    clock = pg.time.Clock()
 
 RED = (255, 0, 0)
 
@@ -46,14 +48,14 @@ def borders(width, height):
     Border(width - 5, 5, width - 5, height - 5)
 
 
-def create_molecule():
+def create_molecule(x, y):
     """Создает по 15 молекул"""
     global N, molecule_group
     color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     for i in molecule_group:
         i.set_color((200, 200, 200))
     for i in range(15):
-        Molecule(width - 30, height - 30, 10, color)
+        Molecule(x, y, 7, color)
     N += 15
 
 
@@ -72,12 +74,13 @@ def show_parametrs():
 def start_gases():
     """Начинает симуляцию идеального газа"""
     global N, T
+    init()
     clear_group(all_sprites_group)
     borders(width, height)
     run = True
     title("Симулятор идеального газа")
     SPEED = 60
-    create_molecule()
+    create_molecule(width - 30, height - 30)
     fon()
     pause = False
     theory = Theory(10, height - 50, 20, "#00ff00")
@@ -102,7 +105,7 @@ def start_gases():
                     if theory.rect.collidepoint(event.pos[0], event.pos[1]):
                         theory.open_theory(screen, THEORY_TEXT)
                     else:
-                        create_molecule()
+                        create_molecule(event.pos[0], event.pos[1])
                 elif event.button == 3:
                     kill_15()
                     if N != 0:
@@ -123,3 +126,4 @@ def start_gases():
 
     N = 0
     T = 100  # K
+    pg.quit()

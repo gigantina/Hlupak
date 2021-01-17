@@ -5,18 +5,22 @@ from functions import *
 from all_sprites import Border, all_sprites_group, theory_group, Theory
 from gases_sprites import Molecule, molecule_group
 
-pg.init()
 
-size = width, height = 800, 600
+def init():
+    global width, height, screen, run, clock
+    pg.init()
 
-screen = pg.display.set_mode(size)
+    size = width, height = 800, 600
 
-pg.display.update()
+    screen = pg.display.set_mode(size)
 
-run = True  # переменна, с помощью ее можно выходить из цикла
+    pg.display.update()
 
-"""А вот тут будет волшебство)"""
-clock = pg.time.Clock()
+    run = True  # переменна, с помощью ее можно выходить из цикла
+
+    """А вот тут будет волшебство)"""
+    clock = pg.time.Clock()
+
 
 RED = (255, 0, 0)
 
@@ -71,6 +75,7 @@ def show_parametrs():
 
 def start_realistic_gases():
     global N, T
+    init()
     clear_group(all_sprites_group)
     borders(width, height)
     run = True
@@ -121,3 +126,4 @@ def start_realistic_gases():
 
     N = 0
     T = 100  # K
+    pg.quit()
